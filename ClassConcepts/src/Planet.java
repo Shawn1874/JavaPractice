@@ -1,5 +1,9 @@
 
 public enum Planet {
+	
+	// First the enumeration values must be defined.  Any type and number of args can be input which is really interesting.
+	// Foreach, the args will be passed in order to the constructor so it must match.  In this case, the planets are initialized with
+	// mass and then radius.  The constructor arguments are ordered in the same way.
 	MERCURY (3.303e+23, 2.4397e6),
     VENUS   (4.869e+24, 6.0518e6),
     EARTH   (5.976e+24, 6.37814e6),
