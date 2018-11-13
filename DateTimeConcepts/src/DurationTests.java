@@ -22,6 +22,7 @@ class DurationTests {
 	void testToHours() {
 		Duration duration = Duration.ofDays(4);
 		assertEquals(4*24, duration.toHours());
+		assertEquals(4*86400, duration.getSeconds());
 	}
 	
 	@Test
@@ -50,6 +51,15 @@ class DurationTests {
 		
 		Duration third = Duration.ofHours(48);
 		assertEquals(first, third);
+	}
+	
+	@Test
+	void testCompareTo() {
+		Duration first = Duration.ofDays(2);
+		Duration second = Duration.ofDays(2);
+		assertEquals(0, first.compareTo(second));
 		
+		Duration third = Duration.ofHours(48);
+		assertEquals(0, first.compareTo(third));
 	}
 }
