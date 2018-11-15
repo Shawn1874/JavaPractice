@@ -23,7 +23,25 @@ class ArrayTests {
 		// very interesting that the return value is 1 based for this case.
 		assertEquals(-10, Arrays.binarySearch(values, 30));
 		assertEquals(-7, Arrays.binarySearch(values, 16));
-		
 	}
-
+	
+	/**
+	 * Demonstrate how to use the System.Array copy method.
+	 * Demonstrate how to make a string from a char array or vice versa.
+	 */
+	@Test
+	void TestArrayCopy() {
+		char [] words = "Unfortunately".toCharArray();
+		char[] word = new char[9];
+		System.arraycopy(words, 2, word, 0, 9);
+		String copy = new String(word);
+		assertTrue("fortunate".equals(copy));
+	}
+	
+	@Test
+	void TestArrayException() {
+		int[] values = new int[5];
+		assertEquals(0, values[0]);
+		assertThrows(IndexOutOfBoundsException.class, () -> { int value = values[17]; });
+	}
 }
