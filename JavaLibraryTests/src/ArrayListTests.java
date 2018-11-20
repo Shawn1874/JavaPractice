@@ -37,4 +37,18 @@ class ArrayListTests {
 		// int so I have to do it explicitly.
 		assertEquals(2, subList.get(0).intValue());
 	}
+	
+	/**
+	 * Demonstrate another method to build an array list.  
+	 * ArrayList<Integer> = { 1, 2, 3, 4 }; is not possible in java as it is in C++
+	 * Arrays.asList is a static method that takes an arbitrary number of arguments
+	 */
+	@Test
+	void testArraysAsListMethod() {
+		List<Integer> li = Arrays.asList(1, 2, 3);
+		assertEquals(3, li.size());
+		
+		List<String>  ls = Arrays.asList("one", "two", "three");
+		assertEquals(3, ls.size());
+	}
 }
