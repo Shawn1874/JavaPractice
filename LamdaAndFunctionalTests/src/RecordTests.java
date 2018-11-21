@@ -38,4 +38,17 @@ public class RecordTests {
 		assertEquals(11, comparatorName.compare(shawn, heather));
 		
 	}
+	
+	@Test
+	void testTranslator() {
+		Record original = new Record(1, "Shawn", "Fox");
+		RecordTranslator<Record, RecordWithKeyValues> translator = new RecordTranslator<>();
+		RecordWithKeyValues translated = translator.apply(original);
+		
+		// Verification of result.
+		assertEquals(3, translated.entries.size());
+		assertTrue(translated.entries.containsKey("Identifier"));
+		assertTrue(translated.entries.containsKey("FirstName"));
+		assertTrue(translated.entries.containsKey("LastName"));
+	}
 }
