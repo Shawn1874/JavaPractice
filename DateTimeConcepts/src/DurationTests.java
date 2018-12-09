@@ -1,6 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.Duration;
+import java.time.Instant;
 
 import org.junit.jupiter.api.Test;
 
@@ -61,5 +62,12 @@ class DurationTests {
 		
 		Duration third = Duration.ofHours(48);
 		assertEquals(0, first.compareTo(third));
+	}
+	
+	@Test
+	void testBetween() {
+		Instant one = Instant.now();
+		Instant twoSecondsFromNow = one.plusSeconds(2);
+		assertEquals(2, Duration.between(one,  twoSecondsFromNow).getSeconds());
 	}
 }
