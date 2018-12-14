@@ -50,5 +50,10 @@ public class RecordTests {
 		assertTrue(translated.entries.containsKey("Identifier"));
 		assertTrue(translated.entries.containsKey("FirstName"));
 		assertTrue(translated.entries.containsKey("LastName"));
+		
+		RecordTranslator<Integer, String> translator2 = new RecordTranslator<>();
+		String result = translator2.apply(Integer.valueOf(5));
+		assertEquals("3", result);
+		
 	}
 }
