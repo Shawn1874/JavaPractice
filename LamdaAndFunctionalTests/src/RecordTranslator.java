@@ -4,9 +4,9 @@ public class RecordTranslator<T, R> implements Function<T, R> {
 
 	private RecordWithKeyValues translate(Record original) {
 		RecordWithKeyValues translated = new RecordWithKeyValues();
-		translated.entries.put("Identifier", Integer.toString(original.identifier));
-		translated.entries.put("FirstName", original.lastName);
-		translated.entries.put("LastName", original.firstName);
+		translated.entries.put("Identifier", Integer.toString(original.getIdentifier()));
+		translated.entries.put("FirstName", original.getLastName());
+		translated.entries.put("LastName", original.getFirstName());
 		return translated;
 	}
 
