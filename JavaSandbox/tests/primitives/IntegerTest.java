@@ -6,30 +6,30 @@ import org.junit.jupiter.api.Test;
 class IntegerTest {
 
 	@Test
-	void TestMin() {
+	void testMin() {
 		assertEquals(Integer.MIN_VALUE, -2147483648);
 	}
 	
 	@Test
-	void TestMax() {
+	void testMax() {
 		assertEquals(Integer.MAX_VALUE, 2147483647);
 	}
 	
 	@Test
-	void TestSizeInfo() {
+	void testSizeInfo() {
 		assertEquals(32, Integer.SIZE);
 		assertEquals(4, Integer.BYTES);
 	}
 	
 	@Test
-	void TestBitCount() {
+	void testBitCount() {
 		assertEquals(32, Integer.bitCount(-1));
 		assertEquals(1, Integer.bitCount(1));
 		assertEquals(8, Integer.bitCount(255));
 	}
 	
 	@Test 
-	void TestDecode() {
+	void testDecode() {
 		Integer result = Integer.decode("-1");
 		assertEquals(-1, result.intValue());
 		
@@ -47,14 +47,23 @@ class IntegerTest {
 	 * constant first to ensure that it is possible.
 	 */
 	@Test
-	void TestNarrowToShort() {
-		Integer value = new Integer(70000);
+	void testNarrowToShort() {
+		Integer value = Integer.valueOf(70000);
 		assertTrue(value.intValue() > (int) Short.MAX_VALUE);
 		assertEquals(4464, value.shortValue());
 	}
 	
+	/**
+	 * A cast from float to int doesn't result in exception.  The value is simply truncated.
+	 */
 	@Test
-	void TestToString() {
+	void testFloatToInt() {
+		float value = 3.21f;
+		assertEquals(3, (int) value);
+	}
+	
+	@Test
+	void testToString() {
 		String fromInt = Integer.toString(25);
 		assertEquals("25", fromInt);
 		

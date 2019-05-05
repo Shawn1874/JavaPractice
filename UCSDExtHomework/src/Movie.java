@@ -1,4 +1,5 @@
 import java.time.*;
+import java.util.Objects;
 
 /**
  * Movie - a class that contains information about a movie.
@@ -7,7 +8,7 @@ import java.time.*;
  *
  */
 public class Movie {
-
+	private static int counter = 0;
 	private String name;
 	private String director;
 	private int runningTime;
@@ -19,14 +20,9 @@ public class Movie {
 	 * The default constructor.
 	 */
 	public Movie() {
-		name = "";
-		director = "";
-		runningTime = 0;
-		budget = 0.0;
-		releaseDate = null;
-		watched = 0;
+		this("", "", 0, 0.0, null, 0);
 	}
-	
+
 	/**
 	 * This is a constructor that accepts arguments.
 	 * @param name the title of the movie (e.g., Ghostbusters, Groundhog Day)
@@ -43,6 +39,41 @@ public class Movie {
 		this.budget = budget;
 		this.releaseDate = releaseDate;
 		this.watched = timesWatched;
+		counter++;
+	}
+	
+	public Movie(Movie rhs) {
+		this(rhs.name, rhs.director, rhs.runningTime, rhs.budget, rhs.releaseDate, rhs.watched);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(budget, director, name, releaseDate, runningTime, watched);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Movie)) {
+			return false;
+		}
+		Movie other = (Movie) obj;
+		return Double.doubleToLongBits(budget) == Double.doubleToLongBits(other.budget)
+				&& Objects.equals(director, other.director) && Objects.equals(name, other.name)
+				&& Objects.equals(releaseDate, other.releaseDate) && runningTime == other.runningTime
+				&& watched == other.watched;
+	}
+	
+	/**
+	 * Print the current reference count of Movie instances.
+	 */
+	public static void displayReferenceCounter() {
+		System.out.printf("%d movies have been created.%n", counter);
 	}
 	
 	/**
@@ -52,10 +83,8 @@ public class Movie {
 		watched++;
 	}
 	
-	/**
-	 * Display information about this object.
-	 */
-	public void display() {
+	@Override
+	public String toString() {
 		StringBuilder toDisplay = new StringBuilder();
 		
 		toDisplay.append(String.format("%s was directed by %s, and first released %s.%n",
@@ -68,7 +97,29 @@ public class Movie {
 				runningTime, 
 				watched));
 		
-		System.out.println(toDisplay);
+		return toDisplay.toString();
+	}
+	
+	/**
+	 * Display information about this object.
+	 */
+	public void display() {
+		
+		System.out.println(toString());
+	}
+	
+	/**
+	 * return the count of the number of instances
+	 */
+	public static int getMovieCount() {
+		return counter;
+	}
+	
+	/**
+	 * Reset the reference counter to zero.
+	 */
+	public static void resetMovieCounter() {
+		counter = 0;
 	}
 	
 	/**
