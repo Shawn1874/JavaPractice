@@ -16,6 +16,13 @@ class MovieTests {
 			LocalDate.of(2014,  8,  1), 
 			12, 
 			ScienceFictionMovie.SubGenre.SoftSciFi);
+   ScienceFictionMovie theMartian = new ScienceFictionMovie("The Martian", 
+         "Ridley Scott", 
+         142, 
+         108.0, 
+         LocalDate.of(15, 10, 2), 
+         2, 
+         ScienceFictionMovie.SubGenre.HardSciFi);
 	
 	@BeforeEach
 	void initialize() {
@@ -123,7 +130,25 @@ class MovieTests {
 	}
 	
 	@Test
-	void testEqualsContractWithInheritance() {
-		
+	void testEqualsWithDifferentTypes() {
+
+	   Movie theMartian = new Movie("The Martian", 
+	         "Ridley Scott", 
+	         142, 
+	         108.0, 
+	         LocalDate.of(15, 10, 2), 
+	         2);
+	   
+	   // Can't be equal because the local is only a Movie with no SubGenre
+      assertFalse(this.theMartian.equals(theMartian));
+      assertFalse(theMartian.equals(this.theMartian));
+	}
+	
+	@Test
+	void testHashCodeSciFiMovie() {
+	   ScienceFictionMovie guardians = new ScienceFictionMovie(this.guardians);
+	   assertEquals(guardians.hashCode(), this.guardians.hashCode());
+	   assertNotEquals(guardians.hashCode(), theMartian.hashCode());
+      assertNotEquals(spaceballs.hashCode(), theMartian.hashCode());
 	}
 }

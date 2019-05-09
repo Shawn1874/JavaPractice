@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * 
@@ -16,7 +17,8 @@ import java.time.LocalDate;
  */
 public class ScienceFictionMovie extends Movie {
 
-	public enum SubGenre { 
+
+   public enum SubGenre { 
 		HardSciFi ("The science portrayed is well researched, and considered plausible."), 
 		SoftSciFi ("The science portrayed is not detailed and well researched"), 
 		SpaceOpera("Stories characterized by extent of space travel, and amount of time that protagonist spends in a space faring lifestyle"), 
@@ -108,4 +110,44 @@ public class ScienceFictionMovie extends Movie {
 	public void setSubGenre(SubGenre subGenre) {
 		this.subGenre = subGenre;
 	}
+
+   /**
+    * Generates a hashCode for an object
+    */
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = super.hashCode();
+      result = prime * result + Objects.hash(subGenre);
+      return result;
+   }
+
+   /**
+    * Compares an instance of a ScienceFictionMovie against another
+    */
+   @Override
+   public boolean equals(Object obj) {
+      if (this == obj) {
+         return true;
+      }
+      
+      if (!super.equals(obj)) {
+         return false;
+      }
+      
+      if (!(obj instanceof ScienceFictionMovie)) {
+         return false;
+      }
+      
+      // This deals with other objects where Movie is further sub-typed
+      // Since two objects of different types and different data can't generate
+      // the same hashcode, this will prevent false positives. It is safe since
+      // only the != operator is used.  
+      if(hashCode() != obj.hashCode()) {
+         return false;
+      }
+      
+      ScienceFictionMovie other = (ScienceFictionMovie) obj;
+      return subGenre == other.subGenre;
+   }
 }

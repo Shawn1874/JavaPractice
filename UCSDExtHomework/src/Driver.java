@@ -87,8 +87,7 @@ public class Driver {
          current.display();
       }
 
-      // Demonstrate toString method for one of the objects just to show that an object 
-      // can be used where a string is expected
+      // Demonstrate toString method
       System.out.println(newline + "Demonstration of toString method for two of the objects");
       System.out.println(movies[1]);
       System.out.println(movies[4]);

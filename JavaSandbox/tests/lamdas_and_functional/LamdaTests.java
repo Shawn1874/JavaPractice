@@ -19,6 +19,7 @@ class LamdaTests {
 		assertEquals(0, calc.operateBinary(100, 200, division));
 		assertEquals(20000, calc.operateBinary(100, 200, multiplication));
 		assertEquals(2, calc.operateBinary(5,  3,  modulus));
+		assertEquals(15, calc.operateBinary(0x3, 0xc, (a, b) -> a | b));
 		
 		// Instead of a lambda, try an existing math operation.  Any existing
 		// binary math operation should work.
