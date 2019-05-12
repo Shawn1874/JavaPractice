@@ -1,3 +1,4 @@
+package com.shawnfox.java2.assignment2;
 
 import java.time.LocalDate;
 
