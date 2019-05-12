@@ -1,0 +1,177 @@
+/**
+ * 
+ */
+package com.shawnfox.java2.assignment3;
+
+import java.math.BigDecimal;
+
+/**
+ * @author Shawn D. Fox
+ *
+ */
+public class Employee {
+   private static long nextId = 100_000;
+   public static BigDecimal MINIMUM_WAGE = new BigDecimal("11.0"); 
+   private String lastName = "";
+   private String firstName = "";
+   private String middleName = "";
+   private BigDecimal hourlySalary;
+   private BigDecimal hoursWorked;
+   private long uniqueId;
+   
+   /**
+    * Parameterized constructor.
+    * 
+    * @exception IllegalArgumentException
+    * @param lastName      must be a non-empty string
+    * @param firstName     must be a non-empty string
+    * @param middleName    can be an empty string if there is no middle name for the employee 
+    * @param hourlySalary  must be greater than 0
+    * @param hoursWorked   must be greater than 0
+    */
+   public Employee(String lastName, String firstName, String middleName, BigDecimal hourlySalary, BigDecimal hoursWorked) {
+      super();
+      testHourlySalary(hourlySalary);
+      testHoursWorked(hoursWorked);
+      testName(lastName);
+      testName(firstName);
+      
+      this.lastName = lastName;
+      this.firstName = firstName;
+      this.middleName = middleName;
+      this.hourlySalary = hourlySalary;
+      this.hoursWorked = hoursWorked;
+      this.uniqueId = generateEmployeeId();
+   }
+   
+   private void testHoursWorked(BigDecimal hoursWorked) {
+      if(hoursWorked.compareTo(BigDecimal.ZERO) < 0)
+         throw new IllegalArgumentException("The hours worked must be greater than 0!");
+   }
+   
+   private void testHourlySalary(BigDecimal hourlySalary) {
+      if(hourlySalary.compareTo(MINIMUM_WAGE) < 0)
+         throw new IllegalArgumentException(String.format("The hourly salary must exceed minimum wage %s", MINIMUM_WAGE));
+   }
+   
+   private void testName(String name) {
+      if(name == null || name.isEmpty()) 
+         throw new IllegalArgumentException("A first or last name cannot be null or empty!");
+   }
+   
+   /**
+    * Get the next available id for a new employee
+    */
+   final private long generateEmployeeId() {
+      return nextId++;
+   }
+
+   /**
+    * Get the employee's last name.
+    * @return the lastName
+    */
+   public String getLastName() {
+      return lastName;
+   }
+
+   /**
+    * Set the employee's last name.
+    * @exception IllegalArgumentException
+    * 
+    * @param lastName
+    */
+   public void setLastName(String lastName) {
+      testName(lastName);
+      this.lastName = lastName;
+   }
+
+   /**
+    * Get the employee's first name.
+    * 
+    * @return the firstName
+    */
+   public String getFirstName() {
+      return firstName;
+   }
+
+   /**
+    * Set the employee's first name.
+    * @exception IllegalArgumentException
+    * 
+    * @param firstName
+    */
+   public void setFirstName(String firstName) {
+      testName(firstName);
+      this.firstName = firstName;
+   }
+
+   /**
+    * Get the employee's middle name.
+    * 
+    * @return the middleName
+    */
+   public String getMiddleName() {
+      return middleName;
+   }
+
+   /**
+    * Set the middle name of the employee.  If there is none, use an empty string.
+    * 
+    * @param middleName the middleName to set
+    */
+   public void setMiddleName(String middleName) {
+      if(middleName == null)
+         middleName = "";
+      
+      this.middleName = middleName;
+   }
+
+   /**
+    * Get the hourly salary of the employee
+    * 
+    * @return the hourlySalary
+    */
+   public BigDecimal getHourlySalary() {
+      return hourlySalary;
+   }
+
+   /**
+    * Set the new hourly salary.
+    * @exception IllegalArgumentException
+    * @param hourlySalary the hourlySalary to set
+    */
+   public void setHourlySalary(BigDecimal hourlySalary) {
+      testHourlySalary(hourlySalary);
+      this.hourlySalary = hourlySalary;
+   }
+
+   /**
+    * Get the number of hours worked by the employee during the last 
+    * pay period.
+    * 
+    * @return hoursWorked
+    */
+   public BigDecimal getHoursWorked() {
+      return hoursWorked;
+   }
+
+   /**
+    * Set the number of hours worked.
+    * 
+    * @exception IllegalArgumentException
+    * @param hoursWorked the hoursWorked to set
+    */
+   public void setHoursWorked(BigDecimal hoursWorked) {
+      testHoursWorked(hoursWorked);
+      this.hoursWorked = hoursWorked;
+   }
+
+   /**
+    * Get the employee id
+    * 
+    * @return uniqueId
+    */
+   public long getUniqueId() {
+      return uniqueId;
+   }
+}
