@@ -47,7 +47,7 @@ class MiscStreamTests {
    
    /**
     * Demonstrate using a stream of a user defined type Album.   Demonstrate using an instance of
-    * a Predicate<T> as part of a filter, and hte use of Collectors.toList() to put the results 
+    * a Predicate<T> as part of a filter, and the use of Collectors.toList() to put the results 
     * into a new List object.
     */
    @Test
@@ -56,7 +56,7 @@ class MiscStreamTests {
       Album powerslave = new Album("Iron Maiden", "Powerslave", 4_500_000, new String[] { "Powerslave", "Aces High", "Two minutes to midnight" });
       Album diaryOfaMadman = new Album("Ozzy Osbourne", "Diary of a Madman", 4_100_000, new String[] {"Over the Mountain", "Flying High Again" });
       
-      List<Album> albums = List.of(pieceOfMind, powerslave, diaryOfaMadman);
+      List<Album> albums = Arrays.asList(pieceOfMind, powerslave, diaryOfaMadman);
       
       Predicate<Album> ironMaidenOnly = (a -> a.getArtistName().equals("Iron Maiden"));
       
