@@ -12,9 +12,7 @@ import java.math.BigDecimal;
 public class Employee {
    public static BigDecimal MINIMUM_WAGE = new BigDecimal("11.0"); 
    private static long nextId = 100_000;
-   private String lastName = "";
-   private String firstName = "";
-   private String middleName = "";
+   private String name = "";
    private BigDecimal hourlySalary;
    private BigDecimal hoursWorked;
    private long uniqueId;
@@ -30,43 +28,17 @@ public class Employee {
    /**
     * Parameterized constructor.
     * 
-    * @exception IllegalArgumentException
-    * @param lastName      must be a non-empty string
-    * @param firstName     must be a non-empty string
-    * @param middleName    can be an empty string if there is no middle name for the employee 
+    * @param name     must be a non-empty string
     * @param hourlySalary  must be greater than 0
     * @param hoursWorked   must be greater than 0
     */
-   public Employee(String lastName, String firstName, String middleName, BigDecimal hourlySalary, BigDecimal hoursWorked) {
+   public Employee(String name, BigDecimal hourlySalary, BigDecimal hoursWorked) {
       super();
       testHourlySalary(hourlySalary);
       testHoursWorked(hoursWorked);
-      testName(lastName);
-      testName(firstName);
+      testName(name);
       
-      this.lastName = lastName;
-      this.firstName = firstName;
-      this.middleName = middleName;
-      this.hourlySalary = hourlySalary;
-      this.hoursWorked = hoursWorked;
-      this.uniqueId = generateEmployeeId();
-   }
-   
-   /**
-    * Parameterized constructor.
-    * 
-    * @exception IllegalArgumentException
-    * @param firstName     must be a non-empty string
-    * @param hourlySalary  must be greater than 0
-    * @param hoursWorked   must be greater than 0
-    */
-   public Employee(String firstName, BigDecimal hourlySalary, BigDecimal hoursWorked) {
-      super();
-      testHourlySalary(hourlySalary);
-      testHoursWorked(hoursWorked);
-      testName(firstName);
-      
-      this.firstName = firstName;
+      this.name = name;
       this.hourlySalary = hourlySalary;
       this.hoursWorked = hoursWorked;
       this.uniqueId = generateEmployeeId();
@@ -85,10 +57,13 @@ public class Employee {
    /**
     * Validates that hourlySalary >= MINIMUM_WAGE
     * @param hourlySalary
+    * @throws InvalidSalaryException 
     */
-   public static void testHourlySalary(BigDecimal hourlySalary) {
+   public static void testHourlySalary(BigDecimal hourlySalary) throws InvalidSalaryException {
       if(hourlySalary.compareTo(MINIMUM_WAGE) < 0)
-         throw new IllegalArgumentException(String.format("The hourly salary must exceed minimum wage %s", MINIMUM_WAGE));
+         throw new InvalidSalaryException(
+               String.format("The hourly salary must exceed minimum wage %s", MINIMUM_WAGE),
+               MINIMUM_WAGE);
    }
    
    /**
@@ -107,7 +82,7 @@ public class Employee {
     */
    @Override
    public String toString() {
-      return String.format("%s, %s, %s, %s", firstName, hourlySalary, hoursWorked, hourlySalary.multiply(hoursWorked));
+      return String.format("%s, %s, %s, %s", name, hourlySalary, hoursWorked, hourlySalary.multiply(hoursWorked));
    }
    
    /**
@@ -120,63 +95,23 @@ public class Employee {
    }
 
    /**
-    * Get the employee's last name.
-    * @return the lastName
-    */
-   public String getLastName() {
-      return lastName;
-   }
-
-   /**
-    * Set the employee's last name.
-    * @exception IllegalArgumentException
-    * 
-    * @param lastName
-    */
-   public void setLastName(String lastName) {
-      testName(lastName);
-      this.lastName = lastName;
-   }
-
-   /**
     * Get the employee's first name.
     * 
-    * @return the firstName
+    * @return the name
     */
-   public String getFirstName() {
-      return firstName;
+   public String getName() {
+      return name;
    }
 
    /**
     * Set the employee's first name.
     * @exception IllegalArgumentException
     * 
-    * @param firstName
+    * @param name 
     */
-   public void setFirstName(String firstName) {
-      testName(firstName);
-      this.firstName = firstName;
-   }
-
-   /**
-    * Get the employee's middle name.
-    * 
-    * @return the middleName
-    */
-   public String getMiddleName() {
-      return middleName;
-   }
-
-   /**
-    * Set the middle name of the employee.  If there is none, use an empty string.
-    * 
-    * @param middleName the middleName to set
-    */
-   public void setMiddleName(String middleName) {
-      if(middleName == null)
-         middleName = "";
-      
-      this.middleName = middleName;
+   public void setFirstName(String name) {
+      testName(name);
+      this.name = name;
    }
 
    /**
@@ -190,10 +125,10 @@ public class Employee {
 
    /**
     * Set the new hourly salary.
-    * @exception IllegalArgumentException
     * @param hourlySalary the hourlySalary to set
+    * @throws InvalidSalaryException 
     */
-   public void setHourlySalary(BigDecimal hourlySalary) {
+   public void setHourlySalary(BigDecimal hourlySalary) throws InvalidSalaryException {
       testHourlySalary(hourlySalary);
       this.hourlySalary = hourlySalary;
    }

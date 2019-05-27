@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 class EmployeeTests {
 
    @Test
-   void testFirstNameOnly() {
+   void testFirstNameOnly() throws InvalidSalaryException {
       Employee shawn = new Employee("Shawn", BigDecimal.valueOf(35), BigDecimal.valueOf(40));
-      assertEquals("Shawn", shawn.getFirstName());
+      assertEquals("Shawn", shawn.getName());
       assertEquals(BigDecimal.valueOf(35), shawn.getHourlySalary());
       assertEquals(BigDecimal.valueOf(40), shawn.getHoursWorked());
       assertEquals( "Shawn, 35, 40, 1400", shawn.toString());
@@ -25,7 +25,7 @@ class EmployeeTests {
    }
    
    @Test
-   void testUniqueIdGeneration() {
+   void testUniqueIdGeneration() throws InvalidSalaryException {
       Employee shawn = new Employee("Shawn", BigDecimal.valueOf(33), BigDecimal.valueOf(40));
       Employee steve = new Employee("Steve", BigDecimal.valueOf(41.75), BigDecimal.valueOf(30));
       Employee mary = new Employee("Mary", BigDecimal.valueOf(42), BigDecimal.valueOf(21.2));
@@ -37,5 +37,13 @@ class EmployeeTests {
       assertNotEquals(ming.getUniqueId(), steve.getUniqueId());
       assertNotEquals(ming.getUniqueId(), mary.getUniqueId());
       assertNotEquals(mary.getUniqueId(), steve.getUniqueId());
+   }
+   
+   @Test
+   void testInvalidHourlySalary() {
+      assertThrows(InvalidSalaryException.class, () -> new Employee(
+            "Ming", 
+            BigDecimal.valueOf(10.9), BigDecimal.valueOf(33.6)));
+     
    }
 }

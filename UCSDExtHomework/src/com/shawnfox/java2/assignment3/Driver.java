@@ -44,7 +44,7 @@ public class Driver {
       catch (NumberFormatException e) {
          log.severe(String.format("%s cannot be converted to BigDecimal", salary));
       }
-      catch(IllegalArgumentException e) {
+      catch(InvalidSalaryException e) {
          log.severe(e.getMessage());
       }
       return result;
@@ -54,7 +54,7 @@ public class Driver {
       boolean result = false;
       try {
          BigDecimal value = new BigDecimal(hours);
-         Employee.testHourlySalary(value);
+         Employee.testHoursWorked(value);
          result = true;
       }
       catch (NumberFormatException e) {
@@ -67,7 +67,10 @@ public class Driver {
    };
    
    /**
-    * This is the entry point for the application.
+    * This is the entry point for the application.  It loads the properties for the logger that will be used,
+    * prompts for the number of employee objects that will be created, prompts for the information for each
+    * new employee, and prints the employees to a .csv file.
+    * 
     * 
     * @param args - no arguments are currently supported
     */
@@ -83,8 +86,6 @@ public class Driver {
           Logger.getAnonymousLogger().severe(e.getMessage());
       }
       
-      log.setLevel(Level.FINEST);
-      
       try {
          log.addHandler(new FileHandler("Assignment3.log"));
       } catch (SecurityException e) {
@@ -99,7 +100,7 @@ public class Driver {
       
       log.entering(Driver.class.getName(), "main");
 
-      String firstName = "";
+      String name = "";
       BigDecimal hourlySalary;
       BigDecimal hoursWorked;
       
@@ -113,13 +114,13 @@ public class Driver {
       for (int n = 0; n < numEmployees; n++) {
          // For each employee, ask for the name, hourly salary, and hours worked for the week
          System.out.println("Enter the information for employee " + (n + 1));
-         firstName = getData("Enter the first name of the employee.", nameTest);
+         name = getData("Enter the first name of the employee.", nameTest);
          hourlySalary = new BigDecimal(getData("Enter the hourly salary of the employee.", hourlySalaryTest));
          hoursWorked = new BigDecimal(getData("Enter the hours that the employee worked this week.", hoursWorkedTest));
          
-         Employee newEmployee = new Employee(firstName, hourlySalary, hoursWorked);
+         Employee newEmployee = new Employee(name, hourlySalary, hoursWorked);
          employees.put(newEmployee.getUniqueId(), newEmployee);
-         log.log(Level.INFO, "Added employee" + newEmployee.getFirstName());
+         log.log(Level.INFO, "Added employee" + newEmployee.getName());
       }
       
       log.log(Level.INFO, "Printing the salary report.");
