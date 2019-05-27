@@ -12,18 +12,31 @@ import java.util.function.Predicate;
 import java.util.logging.*;
 
 /**
- * 
+ * The Driver class contains the entry point of the application which demonstrates
+ * how to use the Employee class.  The following concepts are demonstrated, in 
+ * addition to the basic requirements for assignment 3.
+ * 1) The use of the built in Java logging capability, including the ability to 
+ *    customize the properties of a logger.
+ * 2) A user defined exception class
+ * 3) The use of the Predicate<T> functional interface to design a common method
+ *    that reads data from a scanner and uses a predicate to ensure a valid entry.
+ *    The predicate is implemented with a lambda expression.
+ * 4) Java API documention has been written for all classes and methods so that the
+ *    java command can be used to generate documentation.
+ *  
  * @author Shawn D. Fox
  *
  */
 public class Driver {
 
    private static final Logger log = Logger.getLogger(Driver.class.getName());
-
    private static Scanner keyboard = new Scanner(System.in);
-   
    private static String employeesFileName = "employees.csv";
    
+   /**
+    * The nameTest Predicate can be used by any method that needs to
+    * verify that the string object is not null and not empty.
+    */
    private static Predicate<String> nameTest = (String name) -> { 
       if(name != null && !name.isEmpty()) {
          return true;
@@ -34,6 +47,11 @@ public class Driver {
       }
    };
    
+   /**
+    * The hourlySalaryTest Predicate validates that the salary value is 
+    * Convertible into a BigDecimal object, and that it satisfies the 
+    * requirements of the Employee class using its testHourlySalary method.
+    */
    private static Predicate<String> hourlySalaryTest = (String salary) -> { 
       boolean result = false;
       try {
@@ -50,6 +68,11 @@ public class Driver {
       return result;
    };
    
+   /**
+    * The hourlySalaryTest Predicate validates that the salary value is 
+    * Convertible into a BigDecimal object, and that it satisfies the 
+    * requirements of the Employee class using its testHoursWorked method.
+    */
    private static Predicate<String> hoursWorkedTest = (String hours) -> { 
       boolean result = false;
       try {
@@ -70,7 +93,6 @@ public class Driver {
     * This is the entry point for the application.  It loads the properties for the logger that will be used,
     * prompts for the number of employee objects that will be created, prompts for the information for each
     * new employee, and prints the employees to a .csv file.
-    * 
     * 
     * @param args - no arguments are currently supported
     */
@@ -120,7 +142,7 @@ public class Driver {
          
          Employee newEmployee = new Employee(name, hourlySalary, hoursWorked);
          employees.put(newEmployee.getUniqueId(), newEmployee);
-         log.log(Level.INFO, "Added employee" + newEmployee.getName());
+         log.log(Level.INFO, "Added employee : " + newEmployee );
       }
       
       log.log(Level.INFO, "Printing the salary report.");

@@ -4,6 +4,8 @@
 package com.shawnfox.java2.assignment3;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 
 /**
  * @author Shawn D. Fox
@@ -12,11 +14,11 @@ import java.math.BigDecimal;
 public class Employee {
    public static BigDecimal MINIMUM_WAGE = new BigDecimal("11.0"); 
    private static long nextId = 100_000;
+   private static int wageScale = 2;
    private String name = "";
    private BigDecimal hourlySalary;
    private BigDecimal hoursWorked;
    private long uniqueId;
-
    
    /**
     * Get the next available id for a new employee
@@ -26,7 +28,8 @@ public class Employee {
    }
    
    /**
-    * Parameterized constructor.
+    * Parameterized constructor which takes 3 parameters, and sets the Decimal used for the hourlySalary
+    * to the default scale of 2 decimal places.
     * 
     * @param name     must be a non-empty string
     * @param hourlySalary  must be greater than 0
@@ -37,9 +40,8 @@ public class Employee {
       testHourlySalary(hourlySalary);
       testHoursWorked(hoursWorked);
       testName(name);
-      
       this.name = name;
-      this.hourlySalary = hourlySalary;
+      this.hourlySalary = hourlySalary.setScale(wageScale, RoundingMode.HALF_UP);
       this.hoursWorked = hoursWorked;
       this.uniqueId = generateEmployeeId();
    }
@@ -82,7 +84,8 @@ public class Employee {
     */
    @Override
    public String toString() {
-      return String.format("%s, %s, %s, %s", name, hourlySalary, hoursWorked, hourlySalary.multiply(hoursWorked));
+      return String.format("%s, %s, %s, %s", name, hourlySalary, hoursWorked, 
+            hourlySalary.multiply(hoursWorked).setScale(2, RoundingMode.HALF_UP));
    }
    
    /**
@@ -130,7 +133,7 @@ public class Employee {
     */
    public void setHourlySalary(BigDecimal hourlySalary) throws InvalidSalaryException {
       testHourlySalary(hourlySalary);
-      this.hourlySalary = hourlySalary;
+      this.hourlySalary = hourlySalary.setScale(wageScale, RoundingMode.HALF_UP);
    }
 
    /**
