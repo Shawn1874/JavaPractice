@@ -53,6 +53,26 @@ public class Employee {
    }
    
    /**
+    * Parameterized constructor.
+    * 
+    * @exception IllegalArgumentException
+    * @param firstName     must be a non-empty string
+    * @param hourlySalary  must be greater than 0
+    * @param hoursWorked   must be greater than 0
+    */
+   public Employee(String firstName, BigDecimal hourlySalary, BigDecimal hoursWorked) {
+      super();
+      testHourlySalary(hourlySalary);
+      testHoursWorked(hoursWorked);
+      testName(firstName);
+      
+      this.firstName = firstName;
+      this.hourlySalary = hourlySalary;
+      this.hoursWorked = hoursWorked;
+      this.uniqueId = generateEmployeeId();
+   }
+   
+   /**
     * Validates that hoursWorked parameter is >= 0
     * 
     * @param hoursWorked
@@ -81,9 +101,22 @@ public class Employee {
          throw new IllegalArgumentException("A first or last name cannot be null or empty!");
    }
    
+   /**
+    * Generate a string representation of an employee object.  Returns a comma separated list as 
+    * firstName, hourlySalary, hoursWorked, hourlySalary*hoursWorked
+    */
    @Override
    public String toString() {
-      return String.format("%s, %s %s\t%s\t%s", lastName, firstName, middleName, hourlySalary, hoursWorked);
+      return String.format("%s, %s, %s, %s", firstName, hourlySalary, hoursWorked, hourlySalary.multiply(hoursWorked));
+   }
+   
+   /**
+    * Generate a comma separated string of column names that can be used in combination with toString
+    * 
+    * @return String
+    */
+   public static String getColumnHeaders() {
+      return "Employee Name, Salary, Hours, Weekly Pay";
    }
 
    /**
