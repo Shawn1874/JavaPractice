@@ -10,14 +10,22 @@ import java.math.BigDecimal;
  *
  */
 public class Employee {
-   private static long nextId = 100_000;
    public static BigDecimal MINIMUM_WAGE = new BigDecimal("11.0"); 
+   private static long nextId = 100_000;
    private String lastName = "";
    private String firstName = "";
    private String middleName = "";
    private BigDecimal hourlySalary;
    private BigDecimal hoursWorked;
    private long uniqueId;
+
+   
+   /**
+    * Get the next available id for a new employee
+    */
+   private static long generateEmployeeId() {
+      return nextId++;
+   }
    
    /**
     * Parameterized constructor.
@@ -44,26 +52,38 @@ public class Employee {
       this.uniqueId = generateEmployeeId();
    }
    
-   private void testHoursWorked(BigDecimal hoursWorked) {
+   /**
+    * Validates that hoursWorked parameter is >= 0
+    * 
+    * @param hoursWorked
+    */
+   public static void testHoursWorked(BigDecimal hoursWorked) {
       if(hoursWorked.compareTo(BigDecimal.ZERO) < 0)
          throw new IllegalArgumentException("The hours worked must be greater than 0!");
    }
    
-   private void testHourlySalary(BigDecimal hourlySalary) {
+   /**
+    * Validates that hourlySalary >= MINIMUM_WAGE
+    * @param hourlySalary
+    */
+   public static void testHourlySalary(BigDecimal hourlySalary) {
       if(hourlySalary.compareTo(MINIMUM_WAGE) < 0)
          throw new IllegalArgumentException(String.format("The hourly salary must exceed minimum wage %s", MINIMUM_WAGE));
    }
    
-   private void testName(String name) {
+   /**
+    * Validates that the name is neither empty nor null.
+    * 
+    * @param name - the first or last name of employee to test
+    */
+   public static void testName(String name) {
       if(name == null || name.isEmpty()) 
          throw new IllegalArgumentException("A first or last name cannot be null or empty!");
    }
    
-   /**
-    * Get the next available id for a new employee
-    */
-   final private long generateEmployeeId() {
-      return nextId++;
+   @Override
+   public String toString() {
+      return String.format("%s, %s %s\t%s\t%s", lastName, firstName, middleName, hourlySalary, hoursWorked);
    }
 
    /**
