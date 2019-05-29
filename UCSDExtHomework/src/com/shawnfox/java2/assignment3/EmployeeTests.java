@@ -53,4 +53,15 @@ class EmployeeTests {
       Employee shawn = new Employee("Shawn", BigDecimal.valueOf(33.277), BigDecimal.valueOf(40));
       assertEquals(BigDecimal.valueOf(33.28), shawn.getHourlySalary());
    }
+   
+   @Test
+   void testInvalidName() {
+      assertThrows(IllegalArgumentException.class, () -> Employee.testName("Steve1"));
+      assertThrows(IllegalArgumentException.class, () -> Employee.testName("1Steve1"));
+      assertThrows(IllegalArgumentException.class, () -> Employee.testName("Ste2ve"));
+      Employee.testName("Steve");
+      Employee.testName("Shawn Fox");
+      Employee.testName("Robert C Fox Jr");
+      assertThrows(IllegalArgumentException.class, () -> Employee.testName("   "));
+   }
 }

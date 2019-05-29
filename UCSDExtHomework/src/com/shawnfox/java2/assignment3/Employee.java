@@ -29,9 +29,10 @@ public class Employee {
    
    /**
     * Parameterized constructor which takes 3 parameters, and sets the Decimal used for the hourlySalary
-    * to the default scale of 2 decimal places.
+    * to the default scale of 2 decimal places.  The name string is trimmed of leading and trailing
+    * whitespace before it is saved.
     * 
-    * @param name     must be a non-empty string
+    * @param name     must be a non-empty string with at least one non-numeric character
     * @param hourlySalary  must be greater than 0
     * @param hoursWorked   must be greater than 0
     */
@@ -40,7 +41,7 @@ public class Employee {
       testHourlySalary(hourlySalary);
       testHoursWorked(hoursWorked);
       testName(name);
-      this.name = name;
+      this.name = name.trim();
       this.hourlySalary = hourlySalary.setScale(wageScale, RoundingMode.HALF_UP);
       this.hoursWorked = hoursWorked;
       this.uniqueId = generateEmployeeId();
@@ -62,20 +63,24 @@ public class Employee {
     * @throws InvalidSalaryException 
     */
    public static void testHourlySalary(BigDecimal hourlySalary) throws InvalidSalaryException {
-      if(hourlySalary.compareTo(MINIMUM_WAGE) < 0)
+      if(hourlySalary.compareTo(MINIMUM_WAGE) < 0) {
          throw new InvalidSalaryException(
                String.format("The hourly salary must exceed minimum wage %s", MINIMUM_WAGE),
                MINIMUM_WAGE);
+      }
    }
    
    /**
-    * Validates that the name is neither empty nor null.
+    * Validates that the name is not null, and contains at least one non-numeric or
+    * non-whitespace character.
     * 
-    * @param name - the first or last name of employee to test
+    * @param name - the name of employee to test
     */
    public static void testName(String name) {
-      if(name == null || name.isEmpty()) 
-         throw new IllegalArgumentException("A first or last name cannot be null or empty!");
+      if(name == null  || !name.matches("^[\\s]*[a-zA-Z]+[a-zA-Z\\s]*$")) {
+         String msg = "A name cannot be null, and can only contain letters and whitespace.";
+         throw new IllegalArgumentException(msg);
+      }
    }
    
    /**
@@ -107,14 +112,14 @@ public class Employee {
    }
 
    /**
-    * Set the employee's first name.
-    * @exception IllegalArgumentException
+    * Set the employee's name, after trimming whitespace. The name string is trimmed of
+    *  leading and trailing whitespace before it is saved.
     * 
-    * @param name 
+    * @param name - the name of the employee
     */
-   public void setFirstName(String name) {
+   public void setName(String name) {
       testName(name);
-      this.name = name;
+      this.name = name.trim();
    }
 
    /**
