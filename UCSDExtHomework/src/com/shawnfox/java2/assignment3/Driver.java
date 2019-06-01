@@ -8,8 +8,8 @@ import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.function.Predicate;
 import java.util.logging.*;
+import javax.xml.bind.JAXB;
 
 /**
  * The Driver class contains the entry point of the application which demonstrates
@@ -31,7 +31,7 @@ public class Driver {
 
    private static final Logger log = Logger.getLogger(Driver.class.getName());
    private static Scanner keyboard = new Scanner(System.in);
-   private static String employeesFileName = "employees.csv";
+   private static String employeesFileName = "employees";
    
    /**
     * The nameTest Predicate can be used by any method that needs to
@@ -126,7 +126,7 @@ public class Driver {
       BigDecimal hourlySalary;
       BigDecimal hoursWorked;
       
-      Map<Long, Employee> employees = new HashMap<>();
+      Employees allEmployees = new Employees();
 
       // Determine the number of employees that will be entered
       int numEmployees = getNumberOfEmployees();
@@ -141,12 +141,13 @@ public class Driver {
          hoursWorked = new BigDecimal(getData("Enter the hours that the employee worked this week.", hoursWorkedTest));
          
          Employee newEmployee = new Employee(name, hourlySalary, hoursWorked);
-         employees.put(newEmployee.getUniqueId(), newEmployee);
+         allEmployees.getEmployees().put(newEmployee.getUniqueId(), newEmployee);
          log.log(Level.INFO, "Added employee : " + newEmployee );
       }
       
       log.log(Level.INFO, "Printing the salary report.");
-      printSalaryReport(employees);
+      printSalaryReport(allEmployees);
+      printSalaryReportXml(allEmployees);
       
       log.exiting(Driver.class.getName(), "main");
    }
@@ -157,19 +158,41 @@ public class Driver {
     * 
     * @param employees - container of employees
     */
-   private static void printSalaryReport(Map<Long, Employee> employees) {
+   private static void printSalaryReport(Employees employees) {
 
       log.entering(Driver.class.getName(), "printSalaryReport");
+      String fileName = employeesFileName + ".csv";
       
-      try(FileWriter employeesFile = new FileWriter(employeesFileName);
+      try(FileWriter employeesFile = new FileWriter(fileName);
           BufferedWriter writer = new BufferedWriter(employeesFile)) {
          writer.write(Employee.getColumnHeaders());
          writer.newLine();
          
-         for(Employee current : employees.values()) {
+         for(Employee current : employees.getEmployees().values()) {
             writer.write(current.toString());
             writer.newLine();
          }
+      } catch (IOException e) {
+         log.severe(e.getMessage());
+      }
+      
+      log.exiting(Driver.class.getName(), "printSalaryReport");
+   }
+   
+   /**
+    * Iterate over all employees and write a .csv file with columns for employee info
+    * and the calculated weekly pay.
+    * 
+    * @param employees - container of employees
+    */
+   private static void printSalaryReportXml(Employees employees) {
+
+      log.entering(Driver.class.getName(), "printSalaryReport");
+      String fileName = employeesFileName + ".xml";
+      
+      try(FileWriter employeesFile = new FileWriter(fileName);
+         BufferedWriter writer = new BufferedWriter(employeesFile)) {
+         JAXB.marshal(employees, writer);
       } catch (IOException e) {
          log.severe(e.getMessage());
       }
