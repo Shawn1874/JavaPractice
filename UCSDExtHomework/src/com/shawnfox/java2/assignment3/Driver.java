@@ -37,7 +37,7 @@ public class Driver {
     * The nameTest Predicate can be used by any method that needs to
     * verify that the string object is not null and not empty.
     */
-   private static Predicate<String> nameTest = (String name) -> { 
+   private static IsValid<String> nameTest = (String name) -> { 
       if(name != null && !name.isEmpty()) {
          return true;
       }
@@ -52,7 +52,7 @@ public class Driver {
     * Convertible into a BigDecimal object, and that it satisfies the 
     * requirements of the Employee class using its testHourlySalary method.
     */
-   private static Predicate<String> hourlySalaryTest = (String salary) -> { 
+   private static IsValid<String> hourlySalaryTest = (String salary) -> { 
       boolean result = false;
       try {
          BigDecimal value = new BigDecimal(salary);
@@ -73,7 +73,7 @@ public class Driver {
     * Convertible into a BigDecimal object, and that it satisfies the 
     * requirements of the Employee class using its testHoursWorked method.
     */
-   private static Predicate<String> hoursWorkedTest = (String hours) -> { 
+   private static IsValid<String> hoursWorkedTest = (String hours) -> { 
       boolean result = false;
       try {
          BigDecimal value = new BigDecimal(hours);
@@ -213,7 +213,7 @@ public class Driver {
     * @param isValid - a predicate implementation that tests a string and returns a boolean indicating the validity
     * @return the String validated by the predicate
     */
-   private static String getData(String msg, Predicate<String> isValid) {
+   private static String getData(String msg, IsValid<String> isValid) {
       String entry = "";
       
       do {
