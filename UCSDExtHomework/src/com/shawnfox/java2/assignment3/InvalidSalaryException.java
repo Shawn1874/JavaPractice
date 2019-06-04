@@ -34,8 +34,8 @@ public class InvalidSalaryException extends IllegalArgumentException {
    
 
    /**
-    * This three parameter constructor can be used to indicate a message and what the 
-    * minimum salary value was.
+    * This three parameter constructor can be used to indicate a message, what the 
+    * minimum salary value was, and the root cause.
     * 
     * @param message Clarifies the context in which the exception occurred
     * @param minimumSalary Decimal value representing the minimum salary

@@ -8,23 +8,19 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 /**
+ * An abstraction that represents the data for an employee.
+ * 
  * @author Shawn D. Fox
  *
  */
 public class Employee {
    public static BigDecimal MINIMUM_WAGE = new BigDecimal("11.0"); 
-   private static long nextId = 100_000;
    private static int wageScale = 2;
    private String name = "";
-   private BigDecimal hourlySalary;
-   private BigDecimal hoursWorked;
-   private long uniqueId;
+   private BigDecimal hourlySalary = MINIMUM_WAGE;
+   private BigDecimal hoursWorked = BigDecimal.ZERO;
    
-   /**
-    * Get the next available id for a new employee
-    */
-   private static long generateEmployeeId() {
-      return nextId++;
+   public Employee() {
    }
    
    /**
@@ -32,9 +28,9 @@ public class Employee {
     * to the default scale of 2 decimal places.  The name string is trimmed of leading and trailing
     * whitespace before it is saved.
     * 
-    * @param name     must be a non-empty string with at least one non-numeric character
-    * @param hourlySalary  must be greater than 0
-    * @param hoursWorked   must be greater than 0
+    * @param name must be a non-empty string with at least one non-numeric character
+    * @param hourlySalary The hourly salary of the employee which must be greater than MINIMUM_WAGE
+    * @param hoursWorked The hours worked by the employee for the week which must be greater than or equal to 0
     */
    public Employee(String name, BigDecimal hourlySalary, BigDecimal hoursWorked) {
       super();
@@ -44,13 +40,12 @@ public class Employee {
       this.name = name.trim();
       this.hourlySalary = hourlySalary.setScale(wageScale, RoundingMode.HALF_UP);
       this.hoursWorked = hoursWorked;
-      this.uniqueId = generateEmployeeId();
    }
    
    /**
-    * Validates that hoursWorked parameter is >= 0
+    * Validates the value of hoursWorked
     * 
-    * @param hoursWorked
+    * @param hoursWorked The hours worked by the employee for the week which must be greater than or equal to 0
     */
    public static void testHoursWorked(BigDecimal hoursWorked) {
       if(hoursWorked.compareTo(BigDecimal.ZERO) < 0)
@@ -58,8 +53,8 @@ public class Employee {
    }
    
    /**
-    * Validates that hourlySalary >= MINIMUM_WAGE
-    * @param hourlySalary
+    * Validates the value of hourlySalary
+    * @param hourlySalary The hourly salary of the employee which must be greater than MINIMUM_WAGE
     * @throws InvalidSalaryException 
     */
    public static void testHourlySalary(BigDecimal hourlySalary) throws InvalidSalaryException {
@@ -71,10 +66,11 @@ public class Employee {
    }
    
    /**
-    * Validates that the name is not null, and contains at least one non-numeric or
-    * non-whitespace character.
+    * Validates that the name is not null, contains at least one
+    * non-whitespace character, and contains only whitespace and
+    * alphabetic characters a-z or A-Z
     * 
-    * @param name - the name of employee to test
+    * @param name the name of employee to test
     */
    public static void testName(String name) {
       if(name == null  || !name.matches("^[\\s]*[a-zA-Z]+[a-zA-Z\\s]*$")) {
@@ -115,7 +111,7 @@ public class Employee {
     * Set the employee's name, after trimming whitespace. The name string is trimmed of
     *  leading and trailing whitespace before it is saved.
     * 
-    * @param name - the name of the employee
+    * @param name the name of the employee
     */
    public void setName(String name) {
       testName(name);
@@ -133,8 +129,9 @@ public class Employee {
 
    /**
     * Set the new hourly salary.
-    * @param hourlySalary the hourlySalary to set
-    * @throws InvalidSalaryException 
+    * 
+    * @param hourlySalary The hourly salary of the employee which must be greater than MINIMUM_WAGE
+    * @exception InvalidSalaryException 
     */
    public void setHourlySalary(BigDecimal hourlySalary) throws InvalidSalaryException {
       testHourlySalary(hourlySalary);
@@ -155,19 +152,10 @@ public class Employee {
     * Set the number of hours worked.
     * 
     * @exception IllegalArgumentException
-    * @param hoursWorked the hoursWorked to set
+    * @param hoursWorked The hours worked by the employee for the week which must be greater than or equal to 0
     */
    public void setHoursWorked(BigDecimal hoursWorked) {
       testHoursWorked(hoursWorked);
       this.hoursWorked = hoursWorked;
-   }
-
-   /**
-    * Get the employee id
-    * 
-    * @return uniqueId
-    */
-   public long getUniqueId() {
-      return uniqueId;
    }
 }

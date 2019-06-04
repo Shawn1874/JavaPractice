@@ -1,28 +1,21 @@
 package com.shawnfox.java2.assignment3;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.logging.*;
 import javax.xml.bind.JAXB;
 
 /**
- * The Driver class contains the entry point of the application which demonstrates
- * how to use the Employee class.  The following concepts are demonstrated, in 
- * addition to the basic requirements for assignment 3.
- * 1) The use of the built in Java logging capability, including the ability to 
- *    customize the properties of a logger.
- * 2) A user defined exception class
- * 3) The use of the Predicate<T> functional interface to design a common method
- *    that reads data from a scanner and uses a predicate to ensure a valid entry.
- *    The predicate is implemented with a lambda expression.
- * 4) Java API documention has been written for all classes and methods so that the
- *    java command can be used to generate documentation.
+ * The Driver class contains the entry point of the application which prompts the user for
+ * entry of employee information, builds a container of employee objects, and writes
+ * the data to a file named employees.csv.
  *  
  * @author Shawn D. Fox
  *
@@ -34,17 +27,21 @@ public class Driver {
    private static String employeesFileName = "employees";
    
    /**
-    * The nameTest Predicate can be used by any method that needs to
-    * verify that the string object is not null and not empty.
+    * The nameTest Predicate validates that the name entered is not null and 
+    * valid according to the Employee.test
     */
    private static IsValid<String> nameTest = (String name) -> { 
-      if(name != null && !name.isEmpty()) {
-         return true;
+      boolean result = false;
+      
+      try {
+         Employee.testName(name);
+         result = true;
+      } catch (IllegalArgumentException e) {
+         log.log(Level.SEVERE, 
+                 "Invalid input! The string must be non-null, and contain whitespace, or the laters a-z or A-Z");
       }
-      else {
-         log.log(Level.SEVERE, "Invalid input! The string must be non-null and not empty");
-         return false;
-      }
+      
+      return result;
    };
    
    /**
@@ -94,10 +91,20 @@ public class Driver {
     * prompts for the number of employee objects that will be created, prompts for the information for each
     * new employee, and prints the employees to a .csv file.
     * 
-    * @param args - no arguments are currently supported
+    * @param args no arguments are currently supported
     */
    public static void main(String[] args) {
+      Employees allEmployees;
+      try (BufferedReader input = Files.newBufferedReader(Paths.get(employeesFileName + ".xml"))) {
+         allEmployees = JAXB.unmarshal(input, Employees.class);
+      } 
+      catch (Exception e1) {
+         allEmployees = new Employees();
+         log.info("Existing employee file doesn't exist.");
+      }
+      
       final InputStream inputStream = Driver.class.getResourceAsStream("logging.properties");
+      
       try
       {
           LogManager.getLogManager().readConfiguration(inputStream);
@@ -125,8 +132,6 @@ public class Driver {
       String name = "";
       BigDecimal hourlySalary;
       BigDecimal hoursWorked;
-      
-      Employees allEmployees = new Employees();
 
       // Determine the number of employees that will be entered
       int numEmployees = getNumberOfEmployees();
@@ -141,7 +146,7 @@ public class Driver {
          hoursWorked = new BigDecimal(getData("Enter the hours that the employee worked this week.", hoursWorkedTest));
          
          Employee newEmployee = new Employee(name, hourlySalary, hoursWorked);
-         allEmployees.getEmployees().put(newEmployee.getUniqueId(), newEmployee);
+         allEmployees.getEmployees().add(newEmployee);
          log.log(Level.INFO, "Added employee : " + newEmployee );
       }
       
@@ -156,7 +161,7 @@ public class Driver {
     * Iterate over all employees and write a .csv file with columns for employee info
     * and the calculated weekly pay.
     * 
-    * @param employees - container of employees
+    * @param employees container of employees
     */
    private static void printSalaryReport(Employees employees) {
 
@@ -168,7 +173,7 @@ public class Driver {
          writer.write(Employee.getColumnHeaders());
          writer.newLine();
          
-         for(Employee current : employees.getEmployees().values()) {
+         for(Employee current : employees.getEmployees()) {
             writer.write(current.toString());
             writer.newLine();
          }
@@ -180,14 +185,13 @@ public class Driver {
    }
    
    /**
-    * Iterate over all employees and write a .csv file with columns for employee info
-    * and the calculated weekly pay.
+    * Iterate over all employees and write a all employee data to an .xml file 
     * 
-    * @param employees - container of employees
+    * @param employees container of employees
     */
    private static void printSalaryReportXml(Employees employees) {
 
-      log.entering(Driver.class.getName(), "printSalaryReport");
+      log.entering(Driver.class.getName(), "printSalaryReportXml");
       String fileName = employeesFileName + ".xml";
       
       try(FileWriter employeesFile = new FileWriter(fileName);
@@ -197,17 +201,16 @@ public class Driver {
          log.severe(e.getMessage());
       }
       
-      log.exiting(Driver.class.getName(), "printSalaryReport");
+      log.exiting(Driver.class.getName(), "printSalaryReportXml");
    }
    
    /**
-    * Ask for the number of employees until an integer >= 0 is entered.
+    * Ask for the number of employees until an integer greater than or equal to 0 is entered.
     * 
     * @return the number of employees
     */
    private static int getNumberOfEmployees() {
       int numEmployees = 0;
-      
       
       do {
          System.out.println("Enter the number of employees");
@@ -232,8 +235,8 @@ public class Driver {
     * Get data from the console entered by the user, and return the data as a string. Loop 
     * continuously until the user enters data that is valid according to the supplied predicate.
     * 
-    * @param msg - A message to print at the start of each loop.
-    * @param isValid - a predicate implementation that tests a string and returns a boolean indicating the validity
+    * @param msg A message to print at the start of each loop.
+    * @param isValid a predicate implementation that tests a string and returns a boolean indicating the validity
     * @return the String validated by the predicate
     */
    private static String getData(String msg, IsValid<String> isValid) {

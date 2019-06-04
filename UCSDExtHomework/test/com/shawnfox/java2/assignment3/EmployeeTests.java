@@ -25,20 +25,22 @@ class EmployeeTests {
       assertEquals("Shawn, 50.00, 43.5, 2175.00", shawn.toString());
    }
    
-   @Test
-   void testUniqueIdGeneration() throws InvalidSalaryException {
-      Employee shawn = new Employee("Shawn", BigDecimal.valueOf(33), BigDecimal.valueOf(40));
-      Employee steve = new Employee("Steve", BigDecimal.valueOf(41.75), BigDecimal.valueOf(30));
-      Employee mary = new Employee("Mary", BigDecimal.valueOf(42), BigDecimal.valueOf(21.2));
-      Employee ming = new Employee("Ming", BigDecimal.valueOf(35.0), BigDecimal.valueOf(33.6));
-      
-      assertNotEquals(shawn.getUniqueId(), steve.getUniqueId());
-      assertNotEquals(shawn.getUniqueId(), mary.getUniqueId());
-      assertNotEquals(shawn.getUniqueId(), ming.getUniqueId());
-      assertNotEquals(ming.getUniqueId(), steve.getUniqueId());
-      assertNotEquals(ming.getUniqueId(), mary.getUniqueId());
-      assertNotEquals(mary.getUniqueId(), steve.getUniqueId());
-   }
+   /*
+    * @Test void testUniqueIdGeneration() throws InvalidSalaryException { Employee
+    * shawn = new Employee("Shawn", BigDecimal.valueOf(33),
+    * BigDecimal.valueOf(40)); Employee steve = new Employee("Steve",
+    * BigDecimal.valueOf(41.75), BigDecimal.valueOf(30)); Employee mary = new
+    * Employee("Mary", BigDecimal.valueOf(42), BigDecimal.valueOf(21.2)); Employee
+    * ming = new Employee("Ming", BigDecimal.valueOf(35.0),
+    * BigDecimal.valueOf(33.6));
+    * 
+    * assertNotEquals(shawn.getUniqueId(), steve.getUniqueId());
+    * assertNotEquals(shawn.getUniqueId(), mary.getUniqueId());
+    * assertNotEquals(shawn.getUniqueId(), ming.getUniqueId());
+    * assertNotEquals(ming.getUniqueId(), steve.getUniqueId());
+    * assertNotEquals(ming.getUniqueId(), mary.getUniqueId());
+    * assertNotEquals(mary.getUniqueId(), steve.getUniqueId()); }
+    */
    
    @Test
    void testInvalidHourlySalary() {

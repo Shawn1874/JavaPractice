@@ -71,4 +71,9 @@ class IntegerTest {
 		fromInt = Integer.toString(2_500);
 		assertEquals("2500", fromInt);
 	}
+	
+	@Test
+	void testParse() {
+	   assertThrows(NumberFormatException.class, () -> Integer.parseInt("99#7"));
+	}
 }
