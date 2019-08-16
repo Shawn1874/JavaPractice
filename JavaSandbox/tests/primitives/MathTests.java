@@ -35,4 +35,18 @@ class MathTests {
 		assertEquals(111, Math.floorDiv(1000, 9));
 		
 	}
+        
+        @Test
+        void testCeiling() {
+           assertEquals(Math.ceil(6.4), 7.0);
+           assertEquals(Math.ceil(-6.4), -6.0);
+        
+        }
+           
+        @Test
+        void testFloor() {
+           assertEquals(Math.floor(6.4), 6.0);
+           assertEquals(Math.floor(-6.4), -7.0);
+        }
+        
 }

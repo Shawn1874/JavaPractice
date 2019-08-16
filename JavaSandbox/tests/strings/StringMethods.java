@@ -47,9 +47,13 @@ class StringMethods {
    void testEquals() {
       String name = "shawn";
       String name2 = "shawn";
+      String name3 = new String("shawn");
       
       // equivalence or test of same object?
-      assertEquals(name, name2);
+      assertTrue(name == name2);  // both refer to same object
+      assertFalse(name == name3); // refer to different objects
+      assertTrue(name.equals(name2));
+      assertTrue(name2.equals(name3));
    }
    
    /**
