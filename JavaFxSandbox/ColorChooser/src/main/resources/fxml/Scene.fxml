@@ -40,6 +40,6 @@
       <TextField fx:id="blueTextField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <TextField fx:id="alphaTextField" GridPane.columnIndex="2" GridPane.rowIndex="3" />
       <Circle fill="DODGERBLUE" radius="40.0" stroke="BLACK" strokeType="INSIDE" GridPane.columnIndex="3" GridPane.rowSpan="2147483647" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.columnIndex="3" GridPane.rowSpan="2147483647" />
+      <Rectangle fx:id="colorRectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="100.0" GridPane.columnIndex="3" GridPane.rowSpan="2147483647" />
    </children>
 </GridPane>
