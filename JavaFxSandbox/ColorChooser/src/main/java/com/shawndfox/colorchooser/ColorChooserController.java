@@ -1,13 +1,12 @@
 package com.shawndfox.colorchooser;
 
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -26,16 +25,16 @@ public class ColorChooserController implements Initializable {
     private Slider alphaSlider;
 
     @FXML
-    private TextField redTextField;
+    private RestrictiveTextField redTextField;
 
     @FXML
-    private TextField greenTextField;
+    private RestrictiveTextField greenTextField;
 
     @FXML
-    private TextField blueTextField;
+    private RestrictiveTextField blueTextField;
 
     @FXML
-    private TextField alphaTextField;
+    private RestrictiveTextField alphaTextField;
     
     @FXML
     private Rectangle colorRectangle;
@@ -48,10 +47,15 @@ public class ColorChooserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        // Bind text fields to the corresponding slider
-       redTextField.textProperty().bind(redSlider.valueProperty().asString("%.0f"));
-       greenTextField.textProperty().bind(greenSlider.valueProperty().asString("%.0f"));
-       blueTextField.textProperty().bind(blueSlider.valueProperty().asString("%.0f"));
-       alphaTextField.textProperty().bind(alphaSlider.valueProperty().asString("%.2f"));
+       NumberFormat nf;
+       nf = NumberFormat.getIntegerInstance();
+       redTextField.textProperty().bindBidirectional(redSlider.valueProperty(), nf);
+       greenTextField.textProperty().bindBidirectional(greenSlider.valueProperty(), nf);
+       blueTextField.textProperty().bindBidirectional(blueSlider.valueProperty(), nf);
+       NumberFormat df = NumberFormat.getNumberInstance();
+       df.setMaximumFractionDigits(2);
+       alphaTextField.textProperty().bindBidirectional(alphaSlider.valueProperty(), 
+                                                       df);
        
        // Listeners that set Rectangle's fill based on slider changes
        redSlider.valueProperty().addListener(
