@@ -44,7 +44,13 @@ public class CoverViewerController implements Initializable
       // When the selection changes show the cover image
       booksListView.getSelectionModel().selectedItemProperty().addListener(
          (ObservableValue<? extends Book> ov, Book oldValue, Book newValue) -> {
-            coverImageView.setImage(new Image(newValue.getLargeImage()));
+            coverImageView.setImage(newValue.getLargeImage());
          });
+      
+      booksListView.setCellFactory((ListView<Book> listView) -> {
+         return new ImageTextCell();
+      });
+      
+      booksListView.getSelectionModel().select(0);
    }
 }
