@@ -1,12 +1,16 @@
 package com.shawndfox.javafxconcurrency;
 
 import com.shawndfox.javafxconcurrency.model.FileProperties;
+import com.shawndfox.javafxconcurrency.model.WordCounterTask;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,6 +28,8 @@ public class WordCounterController implements Initializable {
     private TableView<FileProperties> fileTable;
     
     private final ObservableList<FileProperties> fileTableEntries = FXCollections.observableArrayList();
+    
+    ExecutorService threads = Executors.newCachedThreadPool();
 
     @FXML
     void addFileToTable(ActionEvent event) throws IOException {
@@ -32,9 +38,26 @@ public class WordCounterController implements Initializable {
        File chosen = dlg.showOpenDialog(null);
        if(chosen != null) {
          FileProperties fp = new FileProperties();
-         fp.setFileName(chosen.getName());
+         fp.setTheFile(chosen);
          fp.setWordCount("0");
          fileTableEntries.add(fp);
+       }
+    }
+
+    /**
+     * For each entry in the file table, start a background thread to determine the word count of the file.
+     * 
+     * @param event 
+     */
+    @FXML
+    void startCounting(ActionEvent event) {
+       Integer wordCount = 100;
+       
+       for(FileProperties entry : fileTableEntries) {
+          //construct a task, and register an event so that  
+          Task<String> task = new WordCounterTask(entry.getTheFile());
+          entry.bindWordCount(task.valueProperty());
+          threads.submit(task);
        }
     }
     

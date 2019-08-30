@@ -1,8 +1,10 @@
 
 package com.shawndfox.javafxconcurrency.model;
 
+import java.io.File;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 
 /**
  * A java bean used as the data model for a table view that displays information
@@ -14,6 +16,11 @@ public class FileProperties
 {
    private StringProperty fileName;
    
+   private File theFile;
+   
+   public void bindWordCount(ObservableValue<String> value) {
+      wordCount.bind(value);
+   }
    /**
     * Sets the file name property, and causes the construction of the underlying 
     * property if necessary.
@@ -72,5 +79,22 @@ public class FileProperties
           wordCount = new SimpleStringProperty(this, "wordCount");
        }
        return wordCount; 
+   }
+
+   /**
+    * @return the theFile
+    */
+   public File getTheFile()
+   {
+      return theFile;
+   }
+
+   /**
+    * @param theFile the theFile to set
+    */
+   public void setTheFile(File theFile)
+   {
+      this.theFile = theFile;
+      setFileName(theFile.getName());
    }
 }

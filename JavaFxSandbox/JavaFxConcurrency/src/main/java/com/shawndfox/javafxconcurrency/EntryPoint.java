@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
-public class WordCounter extends Application {
+public class EntryPoint extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -33,5 +33,4 @@ public class WordCounter extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }
