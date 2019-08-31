@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<employees>
+    <Employee>
+        <hourlySalary>25.00</hourlySalary>
+        <hoursWorked>50</hoursWorked>
+        <name>shawn</name>
+    </Employee>
+    <Employee>
+        <hourlySalary>25.00</hourlySalary>
+        <hoursWorked>25</hoursWorked>
+        <name>grace</name>
+    </Employee>
+    <Employee>
+        <hourlySalary>11.00</hourlySalary>
+        <hoursWorked>22</hoursWorked>
+        <name>brian</name>
+    </Employee>
+    <Employee>
+        <hourlySalary>27.50</hourlySalary>
+        <hoursWorked>33</hoursWorked>
+        <name>Jeff Baker</name>
+    </Employee>
+    <Employee>
+        <hourlySalary>25.00</hourlySalary>
+        <hoursWorked>15</hoursWorked>
+        <name>Chris Johnson</name>
+    </Employee>
+    <Employee>
+        <hourlySalary>24.20</hourlySalary>
+        <hoursWorked>33</hoursWorked>
+        <name>steve</name>
+    </Employee>
+    <Employee>
+        <hourlySalary>45.20</hourlySalary>
+        <hoursWorked>22</hoursWorked>
+        <name>Steve</name>
+    </Employee>
+    <Employee>
+        <hourlySalary>25.00</hourlySalary>
+        <hoursWorked>50</hoursWorked>
+        <name>Shawn</name>
+    </Employee>
+    <Employee>
+        <hourlySalary>22.00</hourlySalary>
+        <hoursWorked>55</hoursWorked>
+        <name>steve</name>
+    </Employee>
+</employees>
