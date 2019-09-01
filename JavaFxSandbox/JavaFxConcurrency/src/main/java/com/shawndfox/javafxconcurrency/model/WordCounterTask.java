@@ -15,16 +15,16 @@ import javafx.concurrent.Task;
  */
 public class WordCounterTask extends Task<String>
 {
-   private File input;
+   private final File input;
    
    public WordCounterTask(File toAnalyze) {
       input = toAnalyze;
    }
    
    @Override
-   protected String call() throws Exception
+   protected String call()
    {
-      String result = "";
+      String result;
       Integer counter = 0;
       if(input == null) {
          result = "A file was not specified!";

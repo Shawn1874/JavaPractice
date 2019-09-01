@@ -14,15 +14,17 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 
+/**
+ * 
+ * @author Shawn D. Fox
+ */
 public class WordCounterController implements Initializable {
-    @FXML
-    private ComboBox<?> fileList;
 
     @FXML
     private TableView<FileProperties> fileTable;
@@ -30,17 +32,24 @@ public class WordCounterController implements Initializable {
     private final ObservableList<FileProperties> fileTableEntries = FXCollections.observableArrayList();
     
     ExecutorService threads = Executors.newCachedThreadPool();
+    
+    private String initialDirectory;
 
     @FXML
     void addFileToTable(ActionEvent event) throws IOException {
        FileChooser dlg = new FileChooser();
        dlg.setTitle("Pick a text file to analyze!");
+       dlg.setInitialDirectory(new File(initialDirectory));
+       dlg.getExtensionFilters().addAll(
+         new ExtensionFilter("Text Files", "*.md", "*.txt", "*.xml", "*.html", "*.conf"));
+         
        File chosen = dlg.showOpenDialog(null);
        if(chosen != null) {
          FileProperties fp = new FileProperties();
          fp.setTheFile(chosen);
-         fp.setWordCount("0");
+         fp.setWordCount("");
          fileTableEntries.add(fp);
+         initialDirectory = chosen.getParent();
        }
     }
 
@@ -71,5 +80,7 @@ public class WordCounterController implements Initializable {
         wordCountColumn.setCellValueFactory(new PropertyValueFactory("wordCount"));
         
         fileTable.getColumns().setAll(nameColumn, wordCountColumn);
+        
+        initialDirectory = System.getProperty("user.dir");
     }    
 }
