@@ -35,13 +35,20 @@ public class WordCounterController implements Initializable {
     
     private String initialDirectory;
 
+    /**
+     * This is the event handler method for the AddFile button. Displays a file chooser
+     * dialog so that the user can select files.
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     void addFileToTable(ActionEvent event) throws IOException {
        FileChooser dlg = new FileChooser();
        dlg.setTitle("Pick a text file to analyze!");
        dlg.setInitialDirectory(new File(initialDirectory));
        dlg.getExtensionFilters().addAll(
-         new ExtensionFilter("Text Files", "*.md", "*.txt", "*.xml", "*.html", "*.conf"));
+         new ExtensionFilter("Text Files", "*.md", "*.txt", "*.xml", "*.html", "*.conf"),
+         new ExtensionFilter("Java Files", "*.java"));
          
        File chosen = dlg.showOpenDialog(null);
        if(chosen != null) {
@@ -70,6 +77,12 @@ public class WordCounterController implements Initializable {
        }
     }
     
+    /**
+     * Perform initialization of the JavaFx application.  Setup the table view and the initialDirectory
+     * properties that will be eventually used in other methods.
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         fileTable.setItems(fileTableEntries);

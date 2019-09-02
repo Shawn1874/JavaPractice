@@ -4,6 +4,7 @@ package com.shawndfox.javafxconcurrency.model;
 import java.io.File;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 /**
@@ -16,17 +17,26 @@ public class FileProperties
 {
    private StringProperty fileName;
    
+   private StringProperty wordCount;
+   
    private File theFile;
    
+   /**
+    * Bind the wordCount property to an ObservableValue such as the result of a Task
+    * 
+    * @param value an ObservableValue which will be bound
+    */
    public void bindWordCount(ObservableValue<String> value) {
-      wordCount.bind(value);
+      wordCountProperty().bind(value);
+      wordCount.addListener(new FilePropertiesListener(wordCount));
    }
+   
    /**
     * Sets the file name property, and causes the construction of the underlying 
     * property if necessary.
     * @param value 
     */
-   public void setFileName(String value) { 
+   private void setFileName(String value) { 
       fileNameProperty().set(value); 
    }
    
@@ -49,8 +59,6 @@ public class FileProperties
        }
        return fileName; 
    }
-   
-   private StringProperty wordCount;
    
    /**
     * Sets the word count property, and causes the construction of the underlying 
@@ -98,3 +106,24 @@ public class FileProperties
       setFileName(theFile.getName());
    }
 }
+
+/**
+ *
+ * @author Shawn D. Fox
+ */
+class FilePropertiesListener implements ChangeListener
+{
+   private StringProperty source;
+   
+   public FilePropertiesListener(StringProperty property) {
+      source = property;
+   }
+   
+   @Override
+   public void changed(ObservableValue observable, Object oldValue, Object newValue)
+   {
+      observable.removeListener(this);
+      source.unbind();
+   }
+}
+
