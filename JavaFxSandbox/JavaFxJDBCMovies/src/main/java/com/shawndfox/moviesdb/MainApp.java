@@ -19,6 +19,7 @@ public class MainApp extends Application {
         
         stage.setTitle("Movies Collection");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

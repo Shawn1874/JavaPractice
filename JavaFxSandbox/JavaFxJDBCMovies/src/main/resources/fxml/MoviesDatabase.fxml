@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="284.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.shawndfox.moviesdb.MoviesViewController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="423.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.shawndfox.moviesdb.MoviesViewController">
    <bottom>
-      <GridPane hgap="8.0" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+      <GridPane hgap="8.0" maxWidth="1.7976931348623157E308" prefHeight="168.0" prefWidth="767.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
          </BorderPane.margin>
@@ -23,37 +23,24 @@
             <ColumnConstraints hgrow="NEVER" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="98.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="50.0" minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="50.0" minHeight="10.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-          <Button mnemonicParsing="false" onAction="#addMovie" text="Add Movie" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <TextField fx:id="descrTextField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <TextField fx:id="ratingTextField" prefHeight="25.0" prefWidth="54.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="titleTextField" prefHeight="25.0" prefWidth="206.0" GridPane.rowIndex="1" />
-            <Label text="Title" />
-            <Label text="Rating" GridPane.columnIndex="1" />
-            <Label text="Description" GridPane.columnIndex="2" />
+            <Label text="Title" GridPane.rowIndex="1" />
+            <Label text="Rating" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Description" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <TextField fx:id="titleTextField" prefHeight="25.0" prefWidth="206.0" GridPane.rowIndex="2" />
+            <TextField fx:id="ratingTextField" prefHeight="25.0" prefWidth="54.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="descrTextField" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+          <Button mnemonicParsing="false" onAction="#addMovie" text="Add Movie" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <TextArea fx:id="queryTextArea" maxWidth="1.7976931348623157E308" prefRowCount="3" promptText="Enter query here the press Submit Query" wrapText="true" GridPane.columnSpan="3" />
+          <Button mnemonicParsing="false" onAction="#submitQueryButtonPressed" text="Submit Query" GridPane.columnIndex="3" />
          </children>
       </GridPane>
    </bottom>
-   <top>
-      <GridPane hgap="8.0" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="NEVER" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <TextArea fx:id="queryTextArea" maxWidth="1.7976931348623157E308" prefRowCount="3" promptText="Enter query here the press Submit Query" wrapText="true" GridPane.rowIndex="1" />
-          <Button mnemonicParsing="false" onAction="#submitQueryButtonPressed" text="Submit Query" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-         </children>
-         <BorderPane.margin>
-            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-         </BorderPane.margin>
-      </GridPane>
-   </top>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </BorderPane>
