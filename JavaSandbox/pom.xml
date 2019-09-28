@@ -13,6 +13,7 @@
 		<com.google.guava.version>28.1-jre</com.google.guava.version>
 		<java.compiler.release>11</java.compiler.release>
       <openjfx.version>11</openjfx.version>
+      <openjfx.plugin.version>0.0.3</openjfx.plugin.version>
 	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -36,7 +37,7 @@
 			<plugin>
 				<groupId>org.openjfx</groupId>
 				<artifactId>javafx-maven-plugin</artifactId>
-				<version>0.0.3</version>
+				<version>${openjfx.plugin.version}</version>
 			</plugin>
 		</plugins>
 	</build>
