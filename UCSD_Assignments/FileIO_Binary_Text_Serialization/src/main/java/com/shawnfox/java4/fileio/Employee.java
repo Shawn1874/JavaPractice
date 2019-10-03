@@ -15,6 +15,12 @@ public class Employee
       hireDay = LocalDate.of(year, month, day);
    }
 
+   public Employee(String name, Double salary, LocalDate hireDay) {
+      this.name = name;
+      this.salary = salary;
+      this.hireDay = hireDay;
+   }
+
    public String getName()
    {
       return name;

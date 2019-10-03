@@ -31,7 +31,7 @@ public class Driver {
     *    --help (displays help info)
     *    --text perform file IO using text reader and writer
     *    --binary perform file IO using text reader and writer
-    *    --object perform file IO aas object file
+    *    --object perform file IO as object file
     * @throws IOException 
     */
    public static void main(String[] args) throws IOException {
@@ -41,13 +41,16 @@ public class Driver {
          displayHelp();
       }
       else if(args[0].equals("--text")) {
-         TextFileTest.demonstrate();
+         Demonstration demo = new TextFileDemo();
+         demo.demonstrate();
       }
       else if(args[0].equals("--binary")) {
-         TextFileTest.demonstrate();
+         Demonstration demo = new BinaryFileDemo();
+         demo.demonstrate();
       }
       else if(args[0].equals("--object")) {
-         TextFileTest.demonstrate();
+         Demonstration demo = new ObjectStreamDemo();
+         demo.demonstrate();
       }
       else {
          displayHelp();
