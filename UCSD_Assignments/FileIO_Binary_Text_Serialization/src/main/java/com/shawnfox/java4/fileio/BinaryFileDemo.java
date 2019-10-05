@@ -40,11 +40,8 @@ public class BinaryFileDemo extends Demonstration {
        // retrieve all records into a new array
        try
        {
-          Employee[] newStaff = readEmployees();
-
-          // print the newly read employee records
-          for (Employee e : newStaff)
-             System.out.println(e);
+          Employee[] staff = readEmployees();
+          printEmployees(staff);
        }
        catch (Exception e) {
           

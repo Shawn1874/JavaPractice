@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * This is the test driver class that can demonstrate File IO in 3 ways.  Processes
+ * a command line argument to determine how to perform the file IO
  * @author Shawn D. Fox
  *
  */
@@ -27,8 +29,7 @@ public class Driver {
    }
    
    /**
-    * This is the test driver class that can demonstrate File IO in 3 ways.  Processes
-    * a command line argument to determine how to perform the file IO
+    * The entry point method of the application.
     * 
     * @param args one of 4 values
     *    --help (displays help info)

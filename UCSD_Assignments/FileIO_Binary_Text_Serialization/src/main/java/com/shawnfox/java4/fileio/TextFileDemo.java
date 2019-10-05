@@ -31,11 +31,9 @@ public class TextFileDemo extends Demonstration
       try (var in = new Scanner(
             new FileInputStream("employee.txt"), "UTF-8"))
       {
-         Employee[] newStaff = readData(in, PromptUser.No);
+         Employee[] staff = readData(in, PromptUser.No);
 
-         // print the newly read employee records
-         for (Employee e : newStaff)
-            System.out.println(e);
+         printEmployees(staff);
       }
       catch (Exception e) {
          e.printStackTrace();

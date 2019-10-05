@@ -43,11 +43,9 @@ public class ObjectStreamDemo extends Demonstration {
       try (var in = new ObjectInputStream(new FileInputStream("employeeStream.dat")))
       {
          // retrieve all records into a new array
-         var newStaff = (Employee[]) in.readObject();
+         var staff = (Employee[]) in.readObject();
 
-         // print the newly read employee records
-         for (Employee e : newStaff)
-            System.out.println(e);
+         printEmployees(staff);
       } 
       catch (Exception e) {
          e.printStackTrace();

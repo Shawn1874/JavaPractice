@@ -16,6 +16,38 @@ public abstract class Demonstration {
    enum PromptUser { Yes, No };
 
    /**
+    * Reads an array of employees from a scanner
+    * @param in the scanner
+    * @return the array of employees
+    */
+   protected Employee[] readData(Scanner in, PromptUser promptUser)
+   {
+      if(promptUser == PromptUser.Yes) {
+         System.out.println("Enter the number of employees");
+      }
+      
+      int n = in.nextInt();
+      in.nextLine(); // consume newline
+      var employees = new Employee[n];
+      
+      for (int i = 0; i < n; i++)
+      {
+         if(promptUser == PromptUser.Yes) {
+            System.out.println("Enter employee data in the form name|salary|hiredate");
+         }
+         employees[i] = readEmployee(in);
+      }
+      return employees;
+   }
+   
+   protected void printEmployees(Employee[] staff) {
+
+      // print the newly read employee records
+      for (Employee e : staff)
+         System.out.println(e);
+   }
+
+   /**
     * Reads employee data from a buffered reader
     * @param in the scanner
     */
@@ -31,31 +63,4 @@ public abstract class Demonstration {
       int day = hireDate.getDayOfMonth();
       return new Employee(name, salary, year, month, day);
    }   
-
-   /**
-    * Reads an array of employees from a scanner
-    * @param in the scanner
-    * @return the array of employees
-    */
-   protected Employee[] readData(Scanner in, PromptUser promptUser)
-   {
-      // retrieve the array size
-      if(promptUser == PromptUser.Yes) {
-         System.out.println("Enter employee data in the form name|salary|hiredate");
-      }
-      
-      System.out.println("Enter the number of employees");
-      int n = in.nextInt();
-      in.nextLine(); // consume newline
-      var employees = new Employee[n];
-      
-      for (int i = 0; i < n; i++)
-      {
-         if(promptUser == PromptUser.Yes) {
-            System.out.println("Enter employee data in the form name|salary|hiredate");
-         }
-         employees[i] = readEmployee(in);
-      }
-      return employees;
-   }
 }

@@ -1,4 +1,4 @@
-Steve Carlton|985000|2017-10-01
-Joe Montanna|15350000.50|2005-09-30
+Steve Carlton|985000|1944-12-22
+Joe Montanna|15350000.50|1956-06-11
 Carl Johnson|75332.25|1993-01-25
-Andy Petite|8500000|1981-03-07
+Andy Petite|8500000|1972-06-15

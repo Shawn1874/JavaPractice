@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class NIO_ClassTests {
 
-   Path mingw = Paths.get("C:\\Program Files\\Git\\mingw64\\bin");
+   Path mingw = Path.of("C:\\Program Files\\Git\\mingw64\\bin");
    
    @Test
    void testGetFileName() {
