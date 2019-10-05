@@ -18,21 +18,27 @@ public class TextFileDemo extends Demonstration
    public void demonstrate() throws IOException
    {
       try (var consoleInput = new Scanner(System.in);
-           var out = new PrintWriter("employee.dat", StandardCharsets.UTF_8)) {
+           var out = new PrintWriter("employee.txt", StandardCharsets.UTF_8)) {
          
-         Employee staff[] = readData(consoleInput);
+         Employee staff[] = readData(consoleInput, PromptUser.Yes);
          writeData(staff, out);
+      }
+      catch (Exception e) {
+         e.printStackTrace();
       }
       
       // retrieve all records into a new array
       try (var in = new Scanner(
-            new FileInputStream("employee.dat"), "UTF-8"))
+            new FileInputStream("employee.txt"), "UTF-8"))
       {
-         Employee[] newStaff = readData(in);
+         Employee[] newStaff = readData(in, PromptUser.No);
 
          // print the newly read employee records
          for (Employee e : newStaff)
             System.out.println(e);
+      }
+      catch (Exception e) {
+         e.printStackTrace();
       }
    }
 

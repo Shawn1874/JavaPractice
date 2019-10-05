@@ -39,3 +39,4 @@ target
 /JavaFxSandbox/JavaDerbyBooksDb/books/
 UCSD_Assignments/FileIOAndLogging/employees.xml
 UCSD_Assignments/FileIOAndLogging/employees.csv
+*.dat

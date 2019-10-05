@@ -12,12 +12,14 @@ import java.util.Scanner;
 public abstract class Demonstration {
    
    abstract void demonstrate() throws IOException; 
+   
+   enum PromptUser { Yes, No };
 
    /**
     * Reads employee data from a buffered reader
     * @param in the scanner
     */
-   protected Employee readEmployee(Scanner in)
+   private Employee readEmployee(Scanner in)
    {
       String line = in.nextLine();
       String[] tokens = line.split("\\|");
@@ -35,17 +37,23 @@ public abstract class Demonstration {
     * @param in the scanner
     * @return the array of employees
     */
-   protected Employee[] readData(Scanner in)
+   protected Employee[] readData(Scanner in, PromptUser promptUser)
    {
       // retrieve the array size
+      if(promptUser == PromptUser.Yes) {
+         System.out.println("Enter employee data in the form name|salary|hiredate");
+      }
+      
       System.out.println("Enter the number of employees");
       int n = in.nextInt();
       in.nextLine(); // consume newline
-
       var employees = new Employee[n];
+      
       for (int i = 0; i < n; i++)
       {
-         System.out.println("Enter employee data in the form name|salary|hiredate");
+         if(promptUser == PromptUser.Yes) {
+            System.out.println("Enter employee data in the form name|salary|hiredate");
+         }
          employees[i] = readEmployee(in);
       }
       return employees;

@@ -13,17 +13,24 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import com.shawnfox.java4.fileio.Demonstration.PromptUser;
+
 /**
  * @author Shawn D. Fox
  *
  */
 public class BinaryFileDemo extends Demonstration {
 
+   /**
+    * Demonstrate the concept of binary file I/O.  Prompt the user for employee data, 
+    * write it to a binary file, read it back from the file, and then print the
+    * data that was read from the file to the console.
+    */
    @Override
    public void demonstrate() throws IOException {
       try (var consoleInput = new Scanner(System.in);
-           var out = new DataOutputStream(new FileOutputStream("employee.dat"))) {
-              Employee staff[] = readData(consoleInput);
+           var out = new DataOutputStream(new FileOutputStream("employeeBinary.dat"))) {
+              Employee staff[] = readData(consoleInput, PromptUser.Yes);
               writeData(staff, out);
        } 
        catch(Exception e) {
@@ -45,10 +52,12 @@ public class BinaryFileDemo extends Demonstration {
    }
 
    /**
-    * Writes all employees in an array to a print writer
+    * Writes all employees in an array to a DataOutput writer. String fields are preceded
+    * by a length so that the reader has the ability to convert a sequence of bytes
+    * back to a string.
     * 
     * @param employees an array of employees
-    * @param out       a print writer
+    * @param out       a binary stream writer
     */
    private void writeData(Employee[] employees, DataOutput out) throws IOException {
       // write number of employees
@@ -63,10 +72,15 @@ public class BinaryFileDemo extends Demonstration {
       }
    }
    
+   /**
+    * Reads the data back into the program in the same order that it was written.
+    * 
+    * @return an array of employees or null
+    */
    private Employee[] readEmployees() {
       Employee[] employees = null;
       
-      try (DataInputStream inputStream = new DataInputStream(new FileInputStream("employee.dat"))) {
+      try (DataInputStream inputStream = new DataInputStream(new FileInputStream("employeeBinary.dat"))) {
          int numEmployees = inputStream.readInt();
          employees = new Employee[numEmployees];
          
@@ -88,12 +102,19 @@ public class BinaryFileDemo extends Demonstration {
          }
          
       } catch (IOException e) {
-         // TODO Auto-generated catch block
          e.printStackTrace();
       }
       return employees;
    }
    
+   /**
+    * Read exactly size characters or until a 0 is read.
+    * 
+    * @param size number of characters to read
+    * @param in a binary stream to read from
+    * @return a string constructed from characters read in from the stream
+    * @throws IOException
+    */
    private String readFixedString(int size, DataInput in) throws IOException
    {  
       var b = new StringBuilder(size);
@@ -103,9 +124,14 @@ public class BinaryFileDemo extends Demonstration {
       {  
          char ch = in.readChar();
          i++;
-         if (ch == 0) done = true;
-         else b.append(ch);
+         if (ch == 0) {
+            done = true;
+         }
+         else {
+            b.append(ch);
+         }
       }
+      
       in.skipBytes(2 * (size - i));
       return b.toString();
    }

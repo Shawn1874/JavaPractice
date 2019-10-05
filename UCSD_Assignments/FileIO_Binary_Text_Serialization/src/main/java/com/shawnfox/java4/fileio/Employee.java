@@ -1,8 +1,9 @@
 package com.shawnfox.java4.fileio;
 
+import java.io.Serializable;
 import java.time.*;
 
-public class Employee
+public class Employee implements Serializable
 {
    private String name;
    private double salary;

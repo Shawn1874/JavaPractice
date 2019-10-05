@@ -16,7 +16,10 @@ public class Driver {
    // Define a map of options with a description of the options that I can loop and print
    private static HashMap<String, String> options = new HashMap<>();
    
-   public static void options() {
+   /**
+    * Construct a container of options and the descriptions
+    */
+   public static void buildOptions() {
       options.put("--help", "Display information about all options");
       options.put("--text", "Perform a demonstration of file IO by reading and writing text data");
       options.put("--binary", "Perform a demonstration of file IO by reading and writing binary data");
@@ -35,7 +38,7 @@ public class Driver {
     * @throws IOException 
     */
    public static void main(String[] args) throws IOException {
-      options();
+      buildOptions();
       
       if(args.length != 1 || args[0].equals("--help")) {
          displayHelp();
@@ -57,6 +60,10 @@ public class Driver {
       }
    }
    
+   /**
+    * Display the help information for each of the program options.
+    * 
+    */
    public static void displayHelp() {
       for (Map.Entry<String, String> entry : options.entrySet()) {
          System.out.println(String.format("%s : %s", entry.getKey(), entry.getValue()));
