@@ -10,15 +10,30 @@ import java.util.regex.Pattern;
 
 /**
  * Test driver class for Lesson 2 regular expressions.
+ * Reads the input file, and uses regular expressions with capture groups to 
+ * capture groups by name. Next it extracts the groups and formats new string
+ * objects so that the output can be constructed as required.
  * 
  * @author Shawn D. Fox
  *
  */
 public class Driver {
    private static final String fileName = "neighbor-dump.txt";
-   private static final String pandIdRegex = "PANID\\s*=\\s*[a-fA-F0-9]{4}";
-   private static final String macPlusRfRssiRegex = "(?<mac>[a-fA-F0-9]{16}).*(?<rfRssi>-[0-9]+\\.[0-9]+)";
+   private static final String macGroup = "mac";
+   private static final String rfrssiGroup = "rfrssi";
+   private static final String panIdGroup1 = "pan";
+   private static final String panIdGroup2 = "id";
+   
+   private static final String pandIdRegex = String.format(
+         "(?<%s>PANID)\\s*=\\s*(?<%s>[a-fA-F0-9]{4})", panIdGroup1, panIdGroup2);
+   private static final String macPlusRfRssiRegex = String.format(
+         "(?<%s>[a-fA-F0-9]{16}).*(?<%s>-[0-9]+\\.[0-9]+)", macGroup, rfrssiGroup);;
 
+   /**
+    * Entry point of the application.
+    * 
+    * @param args - no arguments are expected so this parameter is ignored.
+    */
    public static void main(String[] args) {
       List<String> panId = new ArrayList<String>();
       List<String> mac = new ArrayList<String>();
@@ -34,8 +49,7 @@ public class Driver {
          Matcher matcher = panIdPattern.matcher(input);
          
          while(matcher.find()) {
-            //System.out.println(matcher.group());
-            panId.add(matcher.group());
+            panId.add(String.format("%s = %s", matcher.group(panIdGroup1), matcher.group(panIdGroup2)));
          }
          
          System.out.println(String.format("- List of PAN IDs (Total of %d)", panId.size()));
@@ -47,10 +61,8 @@ public class Driver {
          matcher = macAndRfRssi.matcher(input);
          
          while(matcher.find()) {
-            mac.add(matcher.group("mac"));
-            rfrssi.add(matcher.group("rfRssi"));
-            //System.out.println(matcher.group(1));
-            //System.out.println(matcher.group(2));
+            mac.add(matcher.group(macGroup));
+            rfrssi.add(matcher.group(rfrssiGroup));
          }
          
          System.out.println(String.format("- List of MAC addresses (Total of %d)", mac.size()));
