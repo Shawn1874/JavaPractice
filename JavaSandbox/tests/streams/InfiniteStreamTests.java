@@ -21,8 +21,15 @@ public class InfiniteStreamTests {
          .forEach(x -> values.add(x));
 
       assertEquals(10, values.size());
+      assertEquals(1, values.get(0));
+      assertEquals(2, values.get(1));
+      assertEquals(10, values.get(9));
    }
    
+   /**
+    * Generate is an infinite stream generator so intermediate methods such as limit
+    * are used to limit the number of values generated.
+    */
    @Test
    void testGenerate() {
 

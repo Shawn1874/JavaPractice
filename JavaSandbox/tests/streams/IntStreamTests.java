@@ -5,11 +5,24 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import java.security.SecureRandom;
+import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 class IntStreamTests {
+   public static Optional<Double> inverse(Double n) {
+      return n == 0 ? Optional.empty() : Optional.of(1 / n);
+   }
+   
+   @Test
+   void testInverse() {
+      var inverted = inverse(0.0);
+      assertTrue(inverted.isEmpty());
+      inverted = inverse(0.1);
+      assertTrue(inverted.isPresent());
+      assertEquals(10, inverted.get());
+   }
 
    /**
     * Range closed is an inclusive range
@@ -30,6 +43,22 @@ class IntStreamTests {
    }
    
    /**
+    * take while stops taking when the predicate returns true.
+    */
+   @Test
+   void testTakeWhile() {
+      assertEquals(10, IntStream.rangeClosed(1, 25).takeWhile(no -> no <= 10).count());
+   }
+   
+   /**
+    * drop while starts taking when the predicate returns true.
+    */
+   @Test
+   void testDropWhile() {
+      assertEquals(15, IntStream.rangeClosed(1, 25).dropWhile(no -> no <= 10).count());
+   }
+   
+   /**
     * Map  transforms each input
     */
    @Test
@@ -41,6 +70,11 @@ class IntStreamTests {
       assertEquals(110, sum);
    }
    
+   /**
+    * Multiple even numbers identified by the filter by 3, and sum the results of the mapped
+    * numbers.
+    * sum = 2*3 + 4*3 + 6*3 + 8*3 + 10*3 = 6 + 12 + 18 + 24 + 30 = 90
+    */
    @Test
    void testFilter() {
       int sum = IntStream.rangeClosed(1,  10)
