@@ -50,6 +50,9 @@ class CollectorsTests {
          assertEquals("Steve Carlton, Shawn Fox", names);
    }
    
+   /**
+    * Demonstrate construction of a key value map using a stream.
+    */
    @Test
    void testToMap() {
       Map<String, Double> employeeSalaries = employees.stream()
