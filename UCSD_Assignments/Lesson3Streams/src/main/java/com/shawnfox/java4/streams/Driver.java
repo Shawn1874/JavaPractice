@@ -43,14 +43,14 @@ public class Driver {
            System.out.println(String.format("String size: %d", input.length()));
            
            before = System.currentTimeMillis();
-           actualOccurrences = countOccurrences(input, searchPattern, Parallel.TRUE);
+           actualOccurrences = countOccurrences(input, searchPattern, Parallel.FALSE);
            after = System.currentTimeMillis();
            lengthWithStream = after - before;
            System.out.println(String.format("Millisecs using stream: %d", lengthWithStream));
            assert(actualOccurrences == expectedOccurrences);
            
            before = System.currentTimeMillis();
-           countOccurrences(input, searchPattern, Parallel.FALSE);
+           countOccurrences(input, searchPattern, Parallel.TRUE);
            after = System.currentTimeMillis();
            lengthWithParallelStream = after - before;
            System.out.println(String.format("Millisecs using parallel stream: %d", lengthWithParallelStream));
