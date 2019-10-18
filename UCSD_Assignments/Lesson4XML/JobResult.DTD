@@ -1,0 +1,4 @@
+<!ELEMENT jobresult (serial,(data)+)>
+<!ELEMENT data (visible-string|structure|double-long-unsigned)+>
+<!ELEMENT structure (unsigned|double-long-unsigned)+>
+<!ATTLIST structure count CDATA #REQUIRED>

@@ -5,10 +5,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-/**
- * 
- */
+import org.w3c.dom.Text;
 
 /**
  * @author Shawn D. Fox
@@ -17,32 +14,85 @@ import org.w3c.dom.NodeList;
 public class Driver {
 
    /**
+    * This is the entry  point of the application.
     * @param args
     */
    public static void main(String[] args) {
-      //System.out.println("Hello World");
+      String fileName = (args.length == 1 && !args[0].isEmpty()) ? args[0] : "JobResult_UCSDExt.xml";
+      demonstrateDomParser(fileName);
+      demonstrateSaxParser(fileName);
+      demonstrateXpathParser(fileName);
+   }
 
+   /**
+    * 
+    * @param fileName
+    */
+   public static void demonstrateDomParser(String fileName) {
       try {
+         System.out.println("Results of XML Parsing using DOM Parser:");
          DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
          DocumentBuilder builder = factory.newDocumentBuilder();
-         Document doc = builder.parse("JobResult_UCSDExt.xml");
-         Element root = doc.getDocumentElement();
-         System.out.println(root.getNodeName());
+         Document doc = builder.parse(fileName);
+
+         printNode( doc.getElementsByTagName("serial"));
+         printNode( doc.getElementsByTagName("visible-string") );
+         printNode( doc.getElementsByTagName("unsigned"));
          
-         NodeList children = root.getChildNodes();
-         for (int i = 0; i < children.getLength(); i++)
-         {
-            Node child = children.item(i);
-            if (child instanceof Element) {
-               var childElement = (Element) child;
-               System.out.println(childElement.getNodeName());
-            }
-         }
       }
       catch(Exception e) {
          e.printStackTrace();
       }
-
    }
+   
+   /**
+    * Prints the child text element of all nodes.
+    * 
+    * @param nodes - NodeList object
+    */
+   static void printNode(NodeList nodes) {
+      
+      for (int i = 0; i < nodes.getLength(); i++)
+      {
+         Node child = nodes.item(i);
+         if (child instanceof Element) {
+            var childElement = (Element) child;
+            var childText = (Text) childElement.getFirstChild();
+            System.out.println(String.format(
+                  "%s: %s", 
+                  childElement.getNodeName(), childText.getData().trim()));
+         }
+      }
+   }
+   
+   /**
+    * 
+    * @param fileName - the name of the XML file
+    */
+   public static void demonstrateSaxParser(String fileName) {
 
+      System.out.println("Results of XML Parsing using SAX Parser:");
+      
+      try {
+         
+      }
+      catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
+   /**
+    * 
+    * @param fileName - the name of the XML file
+    */
+   public static void demonstrateXpathParser(String fileName) {
+
+      System.out.println("Results of XML Parsing using XPATH:");
+      
+      try {
+         
+      }
+      catch (Exception e) {
+         e.printStackTrace();
+      }
+   }
 }

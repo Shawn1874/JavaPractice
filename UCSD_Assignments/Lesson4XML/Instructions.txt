@@ -1,0 +1,23 @@
+Using the skills you have learned related to XML in this lesson, write a Java console application 
+named Lesson4XML that reads in the attached file (JobResults_UCSDExt.xml) and uses XML skills to 
+generate the following output:
+
+$ java Lesson4XML
+Results of XML Parsing using DOM Parser:
+serial: 0000012345
+visible-string: 000000007b020000
+unsigned: 255
+Results of XML Parsing using SAX Parser:
+serial: 0000012345
+visible-string: 000000007b020000
+unsigned: 255
+Results of XML Parsing using XPath:
+serial: 0000012345
+visible-string: 000000007b020000
+unsigned: 255 
+All Done!
+
+Turn in your project as a single ZIP file named Lesson4XML-FNAME-LNAME.zip, where FNAME is your 
+firstname and LNAME is your last-name.
+
+NOTE: Please submit as a .zip file. Do not submit as .rar or .7z. Only .zip file please.
