@@ -31,7 +31,7 @@
                 <archive>
                     <manifest>
                         <!-- <addClasspath>true</addClasspath> -->
-                        <mainClass>com.shawnfox.java4.streams.Driver</mainClass>
+                        <mainClass>com.shawnfox.java4.xml.Driver</mainClass>
                     </manifest>
                 </archive>
             </configuration>

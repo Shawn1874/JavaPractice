@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <jobresult  xmlns="http://www.example.org/NewXMLSchema"
       xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
       xs:schemaLocation="http://www.example.org/NewXMLSchema JobResult.xsd">
