@@ -1,5 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/NewXMLSchema" xmlns:tns="http://www.example.org/NewXMLSchema" elementFormDefault="qualified">
-
-    <element name="jobresult" type="string"></element>
-</schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.example.org/NewXMLSchema"
+	xmlns="http://www.example.org/NewXMLSchema"
+	elementFormDefault="qualified">
+	<xs:element name="jobresult">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="serial" type="xs:string"></xs:element>
+				<xs:element name="data" minOccurs="1" maxOccurs="3">
+					<xs:complexType>
+						<xs:choice minOccurs="1" maxOccurs="3">
+							<xs:element name="visible-string" type="VisibleString" />
+							<xs:element name="structure" type="Structure" />
+							<xs:element name="double-long-unsigned" type="xs:string" />
+						</xs:choice>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="VisibleString">
+		<xs:simpleContent>
+	      <xs:extension base="xs:string">
+            <xs:attribute name="length" type="xs:integer" />
+	      </xs:extension>
+	    </xs:simpleContent>
+   </xs:complexType>
+	<xs:complexType name="Structure">
+		<xs:choice minOccurs="1" maxOccurs="2">
+			<xs:element name="unsigned" type="xs:string" />
+			<xs:element name="double-long-unsigned" type="xs:string" />
+		</xs:choice>
+		<xs:attribute name="count" type="xs:integer" />
+	</xs:complexType>
+</xs:schema>

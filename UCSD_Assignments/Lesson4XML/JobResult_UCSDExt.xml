@@ -1,15 +1,17 @@
-<jobresult>
+<jobresult  xmlns="http://www.example.org/NewXMLSchema"
+      xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+      xs:schemaLocation="http://www.example.org/NewXMLSchema JobResult.xsd">
 	<serial>0000012345</serial>
 	<data>
 		<visible-string length="16">000000007b020000
 		</visible-string>
 	</data>
-	<data>
-		<structure count="2">
-			<unsigned>255</unsigned>
-			<double-long-unsigned>0</double-long-unsigned>
-		</structure>
-	</data>
+   <data>
+      <structure count="2">
+         <unsigned>255</unsigned>
+         <double-long-unsigned>0</double-long-unsigned>
+      </structure>
+   </data>
 	<data>
 		<double-long-unsigned>1538752262</double-long-unsigned>
 	</data>

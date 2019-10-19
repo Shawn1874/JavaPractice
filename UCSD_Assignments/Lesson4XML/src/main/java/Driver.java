@@ -1,5 +1,6 @@
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -20,7 +21,9 @@ public class Driver {
    public static void main(String[] args) {
       String fileName = (args.length == 1 && !args[0].isEmpty()) ? args[0] : "JobResult_UCSDExt.xml";
       demonstrateDomParser(fileName);
+      System.out.println();
       demonstrateSaxParser(fileName);
+      System.out.println();
       demonstrateXpathParser(fileName);
    }
 
@@ -74,6 +77,9 @@ public class Driver {
       System.out.println("Results of XML Parsing using SAX Parser:");
       
       try {
+         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+         DocumentBuilder builder = factory.newDocumentBuilder();
+         Document doc = builder.parse(fileName);
          
       }
       catch (Exception e) {
@@ -85,10 +91,22 @@ public class Driver {
     * @param fileName - the name of the XML file
     */
    public static void demonstrateXpathParser(String fileName) {
-
       System.out.println("Results of XML Parsing using XPATH:");
       
       try {
+
+         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+         DocumentBuilder builder = factory.newDocumentBuilder();
+         Document doc = builder.parse(fileName);
+         
+         var xpFactory = XPathFactory.newInstance();
+         var xpath = xpFactory.newXPath();
+         var result = xpath.evaluate("/jobresult/serial/text()", doc);
+         System.out.println(String.format("serial: %s", result));
+         result = xpath.evaluate("jobresult/data/visible-string/text()", doc);
+         System.out.println(String.format("visible-string: %s", result.trim()));
+         result = xpath.evaluate("jobresult/data/structure/unsigned/text()", doc);
+         System.out.println(String.format("unsigned: %s", result));
          
       }
       catch (Exception e) {
