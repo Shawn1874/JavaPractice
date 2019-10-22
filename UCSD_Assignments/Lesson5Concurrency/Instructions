@@ -1,0 +1,25 @@
+Using the skills you have learned related to Concurrent Programming in this lesson, write a Java
+console application named Lesson5Concurrent that does the following:
+
+- Accepts "--num-threads NUMBER-OF-THREADS" where you can specify how many threads to create. 
+- Accepts "--ReentrantLock" if  you want to use locking. By default you do not use any locking
+
+- Accepts "--AtomicLong" if you want to use AtomicLong. By default you do not use any locking.
+
+NOTE: You can either use no-locking (the default), --ReentrantLock, or --AtomicLong for a given test run.
+
+The program should start by creating the number of threads specified on the command-line. The threads
+should count the number characters that are in the .class and .java files for this project, putting 
+their totals into the following variable:
+public static long count = 0;
+At the end of the program, display the total count.
+
+Run the program with a thread count of 8, and 16 threads, using all three options for locking (default no 
+locking, --ReentrantLock, and --AtomicLong). Do you see any difference in the value reported by count for 
+the differences in threads and locking options?
+
+Turn in your project as a single ZIP file named Lesson5Concurrent-FNAME-LNAME.zip, where FNAME is your
+ firstname and LNAME is your last-name.
+
+NOTE: Please submit as a .zip file. Do not submit as .rar or .7z. Only .zip file please. 
+
