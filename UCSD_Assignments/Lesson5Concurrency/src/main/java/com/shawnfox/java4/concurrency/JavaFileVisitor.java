@@ -20,7 +20,8 @@ import java.util.List;
  */
 public class JavaFileVisitor extends SimpleFileVisitor<Path> {
 
-   private List<Path> matchedPaths = new ArrayList<Path>();
+   private List<Path> javaFiles = new ArrayList<Path>();
+   private List<Path> classFiles = new ArrayList<Path>();
    
    /**
     * @param Path - the file currently being visited
@@ -28,8 +29,13 @@ public class JavaFileVisitor extends SimpleFileVisitor<Path> {
     */
    @Override
    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-      if(attrs.isRegularFile() && (file.toString().endsWith(".class") || file.toString().endsWith(".java"))) {
-         matchedPaths.add(file);
+      if(attrs.isRegularFile()) {
+         if(file.toString().endsWith(".class")) {
+            classFiles.add(file);
+         }
+         else if(file.toString().endsWith(".java")) {
+            javaFiles.add(file);
+         }
       }
       return FileVisitResult.CONTINUE;
    }
@@ -39,8 +45,17 @@ public class JavaFileVisitor extends SimpleFileVisitor<Path> {
     * 
     * @return
     */
-   public List<Path> getMatchedPaths() {
-      return matchedPaths;
+   public List<Path> getJavaFiles() {
+      return javaFiles;
+   }
+   
+   /**
+    * Return a list of all files that matched the search expression.
+    * 
+    * @return
+    */
+   public List<Path> getClassFiles() {
+      return classFiles;
    }
 
 }
