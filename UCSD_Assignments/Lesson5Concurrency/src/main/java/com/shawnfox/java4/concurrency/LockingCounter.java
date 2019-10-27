@@ -3,8 +3,6 @@
  */
 package com.shawnfox.java4.concurrency;
 
-import java.nio.file.Path;
-import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -14,19 +12,11 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author Shawn D. Fox
  *
  */
-public class LockingCounter extends CharacterCounter {
+public class LockingCounter extends CountingStrategy {
 
    private static long totalCount = 0;
    private static ReentrantLock lock = new ReentrantLock();
    
-   /**
-    * @param javaFiles
-    * @param classFiles
-    */
-   public LockingCounter(List<Path> javaFiles, List<Path> classFiles) {
-      super(javaFiles, classFiles);
-   }
-
    @Override
    public long getTotalCount() {
       return totalCount;
@@ -36,6 +26,16 @@ public class LockingCounter extends CharacterCounter {
    public void updateTotalCount(long value) {
       lock.lock();
       totalCount += value;
+      lock.unlock();
+   }
+   
+   /**
+    * Reset the total count to 0.
+    */
+   @Override
+   public void resetTotalCount() {
+      lock.lock();
+      totalCount = 0;
       lock.unlock();
    }
 }

@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * This abstract class provides the basis for demonstrating the management of data
@@ -19,25 +18,29 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author Shawn D. Fox
  *
  */
-public abstract class CharacterCounter implements Callable<Long> {
+public class CharacterCounter implements Callable<Long> {
 
    private List<Path> javaFiles = new ArrayList<Path>();
-   private List<Path> classFiles = new ArrayList<Path>();
+   private CountingStrategy counter;
    
    /**
     * Constructor which initializes the fields.
     * 
     * @param javaFiles - the list of .java files to process
-    * @param classFiles - the list of .class files to process
-    * @Throws - IllegalArgumentException if either or both of the lists are null references
+    * @param counter - a reference to a counting strategy object
+    * @Throws - IllegalArgumentException if either parameter is a null reference
     */
-   public CharacterCounter(List<Path> javaFiles, List<Path> classFiles) {
-      if(javaFiles == null || classFiles == null) {
+   public CharacterCounter(List<Path> javaFiles, CountingStrategy counter) {
+      if(javaFiles == null) {
          throw new IllegalArgumentException("A valid List object filled with paths is expected!");
       }
       
+      if(counter == null) {
+         throw new IllegalArgumentException("A valid strategy for managing the counter is expected!");
+      }
+      
       this.javaFiles = javaFiles;
-      this.classFiles = classFiles;
+      this.counter = counter;
    }
    
    /**
@@ -53,23 +56,8 @@ public abstract class CharacterCounter implements Callable<Long> {
          var input = Files.newBufferedReader(file);
          long localCount = input.lines().mapToLong(s -> s.length()).sum();
          count += localCount;
-         updateTotalCount(localCount);
+         counter.updateTotalCount(localCount);
       }
       return Long.valueOf(count);
    }
-   
-   /**
-    * The method returns the total count of characters within all of the files within 
-    * the lists.
-    * 
-    * @return
-    */
-   abstract public long getTotalCount();
-   
-   /**
-    * The method adds to the total count of characters.
-    * 
-    * @param value - the number of characters counted
-    */
-   abstract public void updateTotalCount(long value);
 }

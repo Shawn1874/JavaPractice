@@ -3,8 +3,6 @@
  */
 package com.shawnfox.java4.concurrency;
 
-import java.nio.file.Path;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -13,13 +11,9 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author Shawn D. Fox
  *
  */
-public class AtomicCharacterCounter extends CharacterCounter {
+public class AtomicCharacterCounter extends CountingStrategy {
 
    private static AtomicLong totalCount = new AtomicLong(0L);
-   
-   public AtomicCharacterCounter(List<Path> javaFiles, List<Path> classFiles) {
-      super(javaFiles, classFiles);
-   }
    
    @Override
    public long getTotalCount() {
@@ -29,5 +23,13 @@ public class AtomicCharacterCounter extends CharacterCounter {
    @Override
    public void updateTotalCount(long value) {
       totalCount.addAndGet(value);
+   }
+   
+   /**
+    * Reset the total count to 0.
+    */
+   @Override
+   public void resetTotalCount() {
+      totalCount.set(0);
    }
 }
