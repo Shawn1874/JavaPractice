@@ -28,19 +28,19 @@ public class Driver implements Callable<Void> {
    @Option(names = { "-n", "--num-threads" }, description = "The number of threads to perform the testing with")
    private int numThreads = 8;
 
-   @ArgGroup(exclusive = true, multiplicity = "0..1")
+   @ArgGroup(exclusive = true)
    SynchronizationOptions synchOptions;
    
    static class SynchronizationOptions {
       @Option(names = { "-rl", "--ReentrantLock" }, 
               description = "If present, the test will be performed using a reentrant lock",
-              required = true)
-      private boolean useReentrantLock = false;
+              required = false)
+      boolean useReentrantLock = false;
 
       @Option(names = { "-al", "AtomicLong" }, 
             description = "The number of threads to perform the testing with",
-            required = true)
-      private boolean useAtomicLong = false;
+            required = false)
+      boolean useAtomicLong = false;
    }
 
    /**

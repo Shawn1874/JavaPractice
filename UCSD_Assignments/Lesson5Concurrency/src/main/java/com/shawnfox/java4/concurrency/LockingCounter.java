@@ -5,6 +5,7 @@ package com.shawnfox.java4.concurrency;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * A class that managers the total character count by synchronizing the methods to 
@@ -16,6 +17,7 @@ import java.util.List;
 public class LockingCounter extends CharacterCounter {
 
    private static long totalCount = 0;
+   private static ReentrantLock lock = new ReentrantLock();
    
    /**
     * @param javaFiles
@@ -26,12 +28,14 @@ public class LockingCounter extends CharacterCounter {
    }
 
    @Override
-   synchronized public long getTotalCount() {
+   public long getTotalCount() {
       return totalCount;
    }
 
    @Override
-   synchronized public void updateTotalCount(long value) {
+   public void updateTotalCount(long value) {
+      lock.lock();
       totalCount += value;
+      lock.unlock();
    }
 }
