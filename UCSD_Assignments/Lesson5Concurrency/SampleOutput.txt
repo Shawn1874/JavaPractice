@@ -1,0 +1,270 @@
+Microsoft Windows [Version 10.0.18362.418]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+C:\GitRepos\JavaSamples\UCSD_Assignments\Lesson5Concurrency>java -jar Lesson5Con
+currency.jar -h
+Usage: Lesson5Concurrency [[-l] | [-a]] [-hV] [-i=<iterationsRequested>]
+                          [-n=<numThreads>]
+  -a, --AtomicLong      If present, the test will be performed using an
+                          AtomicLong to store the shared variable
+  -h, --help            Show this help message and exit.
+  -i, --num-iterations=<iterationsRequested>
+                        The number of times to repeat the test
+  -l, --ReentrantLock   If present, the test will be performed using a
+                          reentrant lock to manage the shared variable
+  -n, --num-threads=<numThreads>
+                        The number of threads to perform the testing with
+  -V, --version         Print version information and exit.
+
+C:\GitRepos\JavaSamples\UCSD_Assignments\Lesson5Concurrency>java -jar Lesson5Con
+currency.jar -n 16 -i 10
+Received the following arguments from the command line
+numThreads: 16, useReentrantLock: false, useAtomicLong: false,
+[.\src\main\java\com\shawnfox\java4\concurrency\AtomicCharacterCounter.java, .\s
+rc\main\java\com\shawnfox\java4\concurrency\CharacterCounter.java, .\src\main\ja
+va\com\shawnfox\java4\concurrency\CountingStrategy.java, .\src\main\java\com\sha
+wnfox\java4\concurrency\Driver.java, .\src\main\java\com\shawnfox\java4\concurre
+ncy\JavaFileVisitor.java, .\src\main\java\com\shawnfox\java4\concurrency\Locking
+Counter.java, .\src\main\java\com\shawnfox\java4\concurrency\UnsynchronizedChara
+cterCounter.java, .\src\test\java\com\shawnfox\java4\concurrency\ThreadTests.jav
+a]
+Iteration 1
+Character count summed from Callable instances: 179104
+Character Count from static field: 175410
+Iteration 2
+Character count summed from Callable instances: 179104
+Character Count from static field: 175121
+Iteration 3
+Character count summed from Callable instances: 179104
+Character Count from static field: 175358
+Iteration 4
+Character count summed from Callable instances: 179104
+Character Count from static field: 176060
+Iteration 5
+Character count summed from Callable instances: 179104
+Character Count from static field: 176079
+Iteration 6
+Character count summed from Callable instances: 179104
+Character Count from static field: 177636
+Iteration 7
+Character count summed from Callable instances: 179104
+Character Count from static field: 177068
+Iteration 8
+Character count summed from Callable instances: 179104
+Character Count from static field: 170571
+Iteration 9
+Character count summed from Callable instances: 179104
+Character Count from static field: 177253
+Iteration 10
+Character count summed from Callable instances: 179104
+Character Count from static field: 174291
+
+C:\GitRepos\JavaSamples\UCSD_Assignments\Lesson5Concurrency>java -jar Lesson5Con
+currency.jar -n 16 -i 10 -l
+Received the following arguments from the command line
+numThreads: 16, useReentrantLock: true, useAtomicLong: false,
+[.\src\main\java\com\shawnfox\java4\concurrency\AtomicCharacterCounter.java, .\s
+rc\main\java\com\shawnfox\java4\concurrency\CharacterCounter.java, .\src\main\ja
+va\com\shawnfox\java4\concurrency\CountingStrategy.java, .\src\main\java\com\sha
+wnfox\java4\concurrency\Driver.java, .\src\main\java\com\shawnfox\java4\concurre
+ncy\JavaFileVisitor.java, .\src\main\java\com\shawnfox\java4\concurrency\Locking
+Counter.java, .\src\main\java\com\shawnfox\java4\concurrency\UnsynchronizedChara
+cterCounter.java, .\src\test\java\com\shawnfox\java4\concurrency\ThreadTests.jav
+a]
+Iteration 1
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 2
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 3
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 4
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 5
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 6
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 7
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 8
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 9
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 10
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+
+C:\GitRepos\JavaSamples\UCSD_Assignments\Lesson5Concurrency>java -jar Lesson5Con
+currency.jar -n 16 -i 10 -a
+Received the following arguments from the command line
+numThreads: 16, useReentrantLock: false, useAtomicLong: true,
+[.\src\main\java\com\shawnfox\java4\concurrency\AtomicCharacterCounter.java, .\s
+rc\main\java\com\shawnfox\java4\concurrency\CharacterCounter.java, .\src\main\ja
+va\com\shawnfox\java4\concurrency\CountingStrategy.java, .\src\main\java\com\sha
+wnfox\java4\concurrency\Driver.java, .\src\main\java\com\shawnfox\java4\concurre
+ncy\JavaFileVisitor.java, .\src\main\java\com\shawnfox\java4\concurrency\Locking
+Counter.java, .\src\main\java\com\shawnfox\java4\concurrency\UnsynchronizedChara
+cterCounter.java, .\src\test\java\com\shawnfox\java4\concurrency\ThreadTests.jav
+a]
+Iteration 1
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 2
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 3
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 4
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 5
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 6
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 7
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 8
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 9
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 10
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+
+C:\GitRepos\JavaSamples\UCSD_Assignments\Lesson5Concurrency>java -jar Lesson5Con
+currency.jar -n 16 -i 10 -r
+Unknown option: '-r'
+Usage: Lesson5Concurrency [[-l] | [-a]] [-hV] [-i=<iterationsRequested>]
+                          [-n=<numThreads>]
+  -a, --AtomicLong      If present, the test will be performed using an
+                          AtomicLong to store the shared variable
+  -h, --help            Show this help message and exit.
+  -i, --num-iterations=<iterationsRequested>
+                        The number of times to repeat the test
+  -l, --ReentrantLock   If present, the test will be performed using a
+                          reentrant lock to manage the shared variable
+  -n, --num-threads=<numThreads>
+                        The number of threads to perform the testing with
+  -V, --version         Print version information and exit.
+
+C:\GitRepos\JavaSamples\UCSD_Assignments\Lesson5Concurrency>java -jar Lesson5Con
+currency.jar -n 16 -i 10 -ReentrantLock
+Unknown option: '-ReentrantLock'
+Possible solutions: --ReentrantLock
+
+C:\GitRepos\JavaSamples\UCSD_Assignments\Lesson5Concurrency>java -jar Lesson5Con
+currency.jar -n 16 -i 10 --ReentrantLock
+Received the following arguments from the command line
+numThreads: 16, useReentrantLock: true, useAtomicLong: false,
+[.\src\main\java\com\shawnfox\java4\concurrency\AtomicCharacterCounter.java, .\s
+rc\main\java\com\shawnfox\java4\concurrency\CharacterCounter.java, .\src\main\ja
+va\com\shawnfox\java4\concurrency\CountingStrategy.java, .\src\main\java\com\sha
+wnfox\java4\concurrency\Driver.java, .\src\main\java\com\shawnfox\java4\concurre
+ncy\JavaFileVisitor.java, .\src\main\java\com\shawnfox\java4\concurrency\Locking
+Counter.java, .\src\main\java\com\shawnfox\java4\concurrency\UnsynchronizedChara
+cterCounter.java, .\src\test\java\com\shawnfox\java4\concurrency\ThreadTests.jav
+a]
+Iteration 1
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 2
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 3
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 4
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 5
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 6
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 7
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 8
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 9
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 10
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+
+C:\GitRepos\JavaSamples\UCSD_Assignments\Lesson5Concurrency>java -jar Lesson5Con
+currency.jar -n 16 -i 15 --AtomicLong
+Received the following arguments from the command line
+numThreads: 16, useReentrantLock: false, useAtomicLong: true,
+[.\src\main\java\com\shawnfox\java4\concurrency\AtomicCharacterCounter.java, .\s
+rc\main\java\com\shawnfox\java4\concurrency\CharacterCounter.java, .\src\main\ja
+va\com\shawnfox\java4\concurrency\CountingStrategy.java, .\src\main\java\com\sha
+wnfox\java4\concurrency\Driver.java, .\src\main\java\com\shawnfox\java4\concurre
+ncy\JavaFileVisitor.java, .\src\main\java\com\shawnfox\java4\concurrency\Locking
+Counter.java, .\src\main\java\com\shawnfox\java4\concurrency\UnsynchronizedChara
+cterCounter.java, .\src\test\java\com\shawnfox\java4\concurrency\ThreadTests.jav
+a]
+Iteration 1
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 2
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 3
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 4
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 5
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 6
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 7
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 8
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 9
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 10
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 11
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 12
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 13
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 14
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+Iteration 15
+Character count summed from Callable instances: 179104
+Character Count from static field: 179104
+
+C:\GitRepos\JavaSamples\UCSD_Assignments\Lesson5Concurrency>^A^A

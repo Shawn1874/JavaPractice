@@ -19,6 +19,11 @@ import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
 /**
+ * This class is the driver of the application which contains the entry point.  The purpose of the
+ * application is to demonstrate 2 options for correctly writing to a variable shared by threads, 
+ * and the result of unsynchronized writes.  Specify -h or --help on the command line to learn all
+ * of the options for executing the program.
+ * 
  * @author Shawn D. Fox
  *
  */
@@ -32,16 +37,16 @@ public class Driver implements Callable<Void> {
    private int iterationsRequested = 1;
 
    @ArgGroup(exclusive = true)
-   SynchronizationOptions synchOptions;
+   SynchronizationOptions synchOptions = new SynchronizationOptions();
    
    static class SynchronizationOptions {
       @Option(names = { "-l", "--ReentrantLock" }, 
-              description = "If present, the test will be performed using a reentrant lock",
+              description = "If present, the test will be performed using a reentrant lock to manage the shared variable",
               required = false)
       boolean useReentrantLock = false;
 
       @Option(names = { "-a", "--AtomicLong" }, 
-            description = "The number of threads to perform the testing with",
+            description = "If present, the test will be performed using an AtomicLong to store the shared variable",
             required = false)
       boolean useAtomicLong = false;
    }
@@ -56,11 +61,9 @@ public class Driver implements Callable<Void> {
    @Override
    public Void call() throws Exception {
       try {
-         if(synchOptions == null) {
-            synchOptions = new SynchronizationOptions();
-         }
          
          // print arguments received
+         System.out.println("Received the following arguments from the command line");
          System.out.println(String.format("numThreads: %d, useReentrantLock: %s, useAtomicLong: %s,", numThreads,
                synchOptions.useReentrantLock ? "true" : "false", synchOptions.useAtomicLong ? "true" : "false"));
 
@@ -69,9 +72,7 @@ public class Driver implements Callable<Void> {
          var visitor = new JavaFileVisitor();
          Files.walkFileTree(dir, visitor);
          System.out.println(visitor.getJavaFiles().toString());
-
          List<CharacterCounter> counters = new ArrayList<>();
-
          CountingStrategy strategy;
          
          if(synchOptions.useReentrantLock)  {
@@ -103,6 +104,8 @@ public class Driver implements Callable<Void> {
                }
                return 0;
             }).sum();
+            
+            System.out.println(String.format("Iteration %d", iteration));
             System.out.println(String.format("Character count summed from Callable instances: %d", summedCount));
             System.out.println(
                   String.format("Character Count from static field: %d", strategy.getTotalCount()));

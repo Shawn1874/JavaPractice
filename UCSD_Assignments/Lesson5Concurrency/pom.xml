@@ -24,19 +24,40 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<!-- Build an executable JAR -->
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>${maven-jar-plugin.version}</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<!-- <addClasspath>true</addClasspath> -->
-							<mainClass>com.shawnfox.java4.xml.Driver</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.2.1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<transformers>
+								<transformer
+									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<mainClass>com.shawnfox.java4.concurrency.Driver</mainClass>
+								</transformer>
+							</transformers>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
+			<!-- <plugin> -->
+			<!-- Build an executable JAR -->
+			<!-- <groupId>org.apache.maven.plugins</groupId> -->
+			<!-- <artifactId>maven-jar-plugin</artifactId> -->
+			<!-- <version>${maven-jar-plugin.version}</version> -->
+			<!-- <configuration> -->
+			<!-- <archive> -->
+			<!-- <manifest> -->
+			<!-- <addClasspath>true</addClasspath> -->
+			<!-- <mainClass>com.shawnfox.java4.concurrency.Driver</mainClass> -->
+			<!-- </manifest> -->
+			<!-- </archive> -->
+			<!-- </configuration> -->
+			<!-- </plugin> -->
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${maven-surefire-plugin.version}</version>
@@ -45,7 +66,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>Lesson3Streams</finalName>
+		<finalName>Lesson5Concurrency</finalName>
 	</build>
 	<dependencies>
 		<dependency>
