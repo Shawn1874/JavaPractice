@@ -1,0 +1,21 @@
+Using the skills you have learned related to Network Programming in this lesson, write TWO Java console applications, one named Lesson6NetworkingServer and the other named Lesson6NetworkingClient.
+
+- Lesson6NetworkingServer. --port NUMBER. When you start up the Lesson6NetworkingServer, give it a port number to lisen on. When a client connects to the server, send back the folllowing:
+
+
+HTTP/1.0 200 OK
+Content-Type: text/html
+
+
+<html>
+<head><title>Java Networking</title></head>
+<body>
+<h1>Java Networking</h1>
+</body>
+</html>
+- Lesson6NetworkingClient --server ADDRESS --port PORT. After starting up the Lesson6NetworkingServer, in another console window startup the Lesson6NetworkingClient, specifying the server address and port number. Then connect to the server, and display the info returned by the server to the console.
+- Use your web-browser to also connect to the server. What do you observe?
+
+Turn in your project as a single ZIP file named Lesson6Networking-FNAME-LNAME.zip, where FNAME is your firstname and LNAME is your last-name.
+
+NOTE: Please submit as a .zip file. Do not submit as .rar or .7z. Only .zip file please. 
