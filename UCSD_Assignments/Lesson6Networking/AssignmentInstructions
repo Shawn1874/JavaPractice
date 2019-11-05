@@ -4,7 +4,7 @@ Lesson6NetworkingClient.
 
 - Lesson6NetworkingServer. --port NUMBER. 
 When you start up the Lesson6NetworkingServer, give it a port number to listen on. 
-When a client connects to the server, send back the folllowing:
+When a client connects to the server, send back the following:
 
 HTTP/1.0 200 OK
 Content-Type: text/html

@@ -13,11 +13,11 @@ import java.util.*;
  */
 public class EchoServer
 {
-   public static void testServerSocket(String[] args) throws IOException
+   public static void testServerSocket(int portNumber) throws IOException
    {
       System.out.println("entering testServerSocket");
       // establish server socket
-      try (var s = new ServerSocket(8189))
+      try (var s = new ServerSocket(portNumber))
       {
          // wait for client connection
          try (Socket incoming = s.accept())
