@@ -33,6 +33,9 @@
                            <mainClass>com.shawnfox.java4.networking.server.Driver</mainClass>
                         </transformer>
                      </transformers>
+                     <includes>
+                        <include>*.txt</include>
+                     </includes>
                   </configuration>
                </execution>
             </executions>
