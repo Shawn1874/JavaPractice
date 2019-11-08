@@ -5,10 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-import org.junit.After;
 import org.junit.jupiter.api.*;
 
 class NIO_ClassTests {
