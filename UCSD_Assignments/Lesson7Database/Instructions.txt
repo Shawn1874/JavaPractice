@@ -1,0 +1,19 @@
+Using the skills you have learned related to Database in this lesson, install the Apache Derby
+Database and create a database named COREJAVA.
+
+Then write a Java console application named Lesson7Database that reads in the attached file 
+(Lessons.sqll) and uses JDBC to populate the database. After populating the database, query the
+Lessons table metadata to read the column names. Use these column names as the headers for your
+output. Then query the contents of the Lessons table, displaying each lesson number and title on
+a separate line.
+
+$ java Lesson7Database Lessons.sql
+Database Connection info: ...
+Connecting to the database: Done.
+Populating the database: Done.
+Query of Lessons table results:
+....
+Turn in your project as a single ZIP file named Lesson7Database-FNAME-LNAME.zip, where FNAME is
+your firstname and LNAME is your last-name.
+
+NOTE: Please submit as a .zip file. Do not submit as .rar or .7z. Only .zip file please. 
