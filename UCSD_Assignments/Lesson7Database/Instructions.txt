@@ -2,7 +2,7 @@ Using the skills you have learned related to Database in this lesson, install th
 Database and create a database named COREJAVA.
 
 Then write a Java console application named Lesson7Database that reads in the attached file 
-(Lessons.sqll) and uses JDBC to populate the database. After populating the database, query the
+(Lessons.sql) and uses JDBC to populate the database. After populating the database, query the
 Lessons table metadata to read the column names. Use these column names as the headers for your
 output. Then query the contents of the Lessons table, displaying each lesson number and title on
 a separate line.

@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 
@@ -21,6 +23,7 @@ import java.sql.Statement;
 public class Driver {
 
    private static final String DATABASE_URL = "jdbc:derby:COREJAVA;create=true";
+   private Connection dbConnection;
    
    /**
     * Entry point of the application.
@@ -31,14 +34,20 @@ public class Driver {
       try
       {
          var driver = new Driver();
-         Connection db = driver.populateDatabase();
-         System.out.println("Closing the connection");
-         db.close();
+         driver.populateDatabase();
+         driver.executeQueryStatements();
+         driver.dropTables();
       }
-      catch (Exception ex)
-      {
+      catch (Exception ex) {
          ex.printStackTrace();
       }
+   }
+   
+   public Driver() throws SQLException {
+      System.out.printf("Connection Info %s: %n", DATABASE_URL);
+      System.out.print("Connecting ");
+      dbConnection = DriverManager.getConnection(DATABASE_URL);
+      System.out.println("- done.");
    }
    
    /**
@@ -49,32 +58,48 @@ public class Driver {
     * 
     * @return
     */
-   public Connection populateDatabase() {
+   public void populateDatabase() {
       var input = Driver.class.getClassLoader().getResourceAsStream("Lessons.sql");
-      System.out.println("Connecting to: " + DATABASE_URL);
-      
-      try (BufferedReader lessonsReader = new BufferedReader(new InputStreamReader(input, StandardCharsets.UTF_8));
-           Connection connection = DriverManager.getConnection(DATABASE_URL);
-           Statement stat = connection.createStatement())
+      try (BufferedReader lessonsReader = new BufferedReader(
+            new InputStreamReader(input, StandardCharsets.UTF_8));
+           Statement stat = dbConnection.createStatement();)
       {
-         System.out.println("Connected");
          String line;
-         
+
+         System.out.println("Populating database");
          while( (line = lessonsReader.readLine()) != null) {
             if (!line.isBlank()) {
                stat.executeUpdate(line);
             }
             System.out.println(line);
          }
-         
-         stat.executeUpdate("DROP TABLE Lessons");
-
-         return connection;
       }
       catch (Exception e) {
          e.printStackTrace();
-         return null;
       }
+   }
+   
+   private void executeQueryStatements() {
+      try (var statement = dbConnection.createStatement(
+            ResultSet.TYPE_SCROLL_INSENSITIVE, 
+            ResultSet.CONCUR_READ_ONLY)) {
+         ResultSet rs = statement.executeQuery("SELECT * FROM Lessons");
+         
+         var rsmd = rs.getMetaData();
+         System.out.println(rsmd.getColumnName(1) + ", " + rsmd.getColumnName(2));
+         
+         while (rs.next())
+            System.out.println(rs.getString(1) + ", " + rs.getString(2));
+      }
+      catch (SQLException e) {
+         e.printStackTrace();
+      }
+   }
+   
+   private void dropTables() throws SQLException {
+      System.out.println("Dropping tables");
+      var statement = dbConnection.createStatement();
+      statement.executeUpdate("DROP TABLE Lessons");
    }
 
 }
