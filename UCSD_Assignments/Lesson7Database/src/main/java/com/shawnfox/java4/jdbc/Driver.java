@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -36,9 +37,13 @@ public class Driver {
       {
          var driver = new Driver();
          driver.printDatabaseMetadata();
-         driver.populateDatabase();
+         if(!driver.tableExists("LESSONS")) {
+            driver.populateDatabase();
+         }
+         else {
+            System.out.println("TABLES LESSONS already exists.  No need to populate the database.");
+         }
          driver.executeQueryStatements();
-         driver.dropTables();
       }
       catch (Exception ex) {
          ex.printStackTrace();
@@ -124,6 +129,7 @@ public class Driver {
       String orderTitleAsc = "ORDER BY TITLE";
       String beginsOrEndsWithS = "WHERE TITLE LIKE 'S%' OR TITLE LIKE '%s'";
       String between38 = "WHERE Lesson_Num BETWEEN 3 AND 8";
+      System.out.println();
       System.out.println("Demonstrate the use of Query Statements");
       
       try (var statement = dbConnection.createStatement(
@@ -138,6 +144,7 @@ public class Driver {
                selectAll, 
                orderByDesc);
          rs = statement.executeQuery(query);
+         System.out.println();
          System.out.println(query);
          printResultSet(rs);
          rs.close();
@@ -146,6 +153,7 @@ public class Driver {
                selectAll, 
                orderTitleAsc);
          rs = statement.executeQuery(query);
+         System.out.println();
          System.out.println(query);
          printResultSet(rs);
          rs.close();
@@ -155,6 +163,7 @@ public class Driver {
                beginsOrEndsWithS,
                orderByDesc);
          rs = statement.executeQuery(query);
+         System.out.println();
          System.out.println(query);
          printResultSet(rs);
          rs.close();
@@ -163,7 +172,22 @@ public class Driver {
                selectAll, 
                between38);
          rs = statement.executeQuery(query);
+         System.out.println();
          System.out.println(query);
+         printResultSet(rs);
+         rs.close();
+         statement.close();
+
+         String betweenAny = "WHERE Lesson_Num BETWEEN ? AND ?";
+         query = String.format("%s %s", 
+               selectAll, 
+               betweenAny);
+         var preparedStatement = dbConnection.prepareStatement(query);
+         preparedStatement.setInt(1, 2);
+         preparedStatement.setInt(2, 5);
+         System.out.println();
+         System.out.println(query);
+         rs = preparedStatement.executeQuery();  // lessons between 2 and 5
          printResultSet(rs);
          rs.close();
       }
@@ -190,16 +214,20 @@ public class Driver {
          e.printStackTrace();
       }
    }
-   
+
    /**
-    * Drop the table from the database.
-    * 
+    * Determines whether or not a table already exists within the database.
+    *
+    * @param tableName - the name of the table to search for within the DB metadata
+    * @return true if the table exists, and false otherwise
     * @throws SQLException
     */
-   private void dropTables() throws SQLException {
-      System.out.println("Dropping tables");
-      var statement = dbConnection.createStatement();
-      statement.executeUpdate("DROP TABLE Lessons");
+   private boolean tableExists(String tableName) throws SQLException
+   {
+      DatabaseMetaData dbMetaData = dbConnection.getMetaData();
+      ResultSet rs = dbMetaData.getTables(null, null, tableName, null);
+      boolean exists = rs.next();
+      return exists;
    }
 
 }
