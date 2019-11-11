@@ -5,6 +5,6 @@ import com.horstmann.greet.Greeter;
 public class HelloWorld {
     public static void main(String[] args) {
        Greeter greeter = Greeter.newInstance();
-       System.out.println(greeter.greet("Mr. McEntire!"));
+       System.out.println(greeter.greet("Mr. McEntire"));
     }
 }
