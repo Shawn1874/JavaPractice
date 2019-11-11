@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>Lesson8</groupId>
+  <artifactId>Lesson8-Parent</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <junit.jupiter.version>5.5.2</junit.jupiter.version>
+      <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+      <maven-jar-plugin.version>3.1.2</maven-jar-plugin.version>
+      <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
+      <java.compiler.release>11</java.compiler.release>
+   </properties>
+   <dependencies>
+      <dependency>
+         <groupId>org.junit.jupiter</groupId>
+         <artifactId>junit-jupiter</artifactId>
+         <version>${junit.jupiter.version}</version>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
+   <modules>
+   	<module>Ch15.Sec03</module>
+   	<module>ch15.sec04</module>
+   	<module>ch15.sec05</module>
+   	<module>com.horstmann.greet</module>
+   </modules>
+</project>
