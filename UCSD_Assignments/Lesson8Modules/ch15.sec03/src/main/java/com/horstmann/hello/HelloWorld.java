@@ -1,4 +1,4 @@
-package com.shawnfox.hellomodules;
+package com.horstmann.hello;
 
 public class HelloWorld {
    public static void main(String[] args) {

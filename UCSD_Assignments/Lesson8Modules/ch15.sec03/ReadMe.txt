@@ -1,4 +1,4 @@
 # Used these two commands to perform command line testing.  However it is a modular maven project
 # that also produces an executable JAR.
-javac ch15.sec03/src/main/java/module-info.java ch15.sec03/src/main/java/com/shawnfox/hellomodules/HelloWorld.java
-java -p ch15.sec03/src/main/java -m ch15.sec03/com.shawnfox.hellomodules.HelloWorld
+javac ch15.sec03/src/main/java/module-info.java ch15.sec03/src/main/java/com/horstmann/hello/HelloWorld.java
+java -p ch15.sec03/src/main/java -m ch15.sec03/com.horstmann.hello.HelloWorld
