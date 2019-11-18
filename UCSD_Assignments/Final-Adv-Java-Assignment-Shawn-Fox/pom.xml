@@ -22,5 +22,6 @@
    </dependencies>
    <modules>
    	<module>Adv-Java-Final-Project-Application</module>
+   	<module>com.adv.java.xml</module>
    </modules>
 </project>
