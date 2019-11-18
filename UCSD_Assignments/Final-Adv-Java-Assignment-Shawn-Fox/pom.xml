@@ -21,7 +21,9 @@
       </dependency>
    </dependencies>
    <modules>
-   	<module>Adv-Java-Final-Project-Application</module>
+   	<module>com.adv.java.application</module>
    	<module>com.adv.java.xml</module>
+   	<module>com.adv.java.iostream</module>
+   	<module>com.adv.java.streams</module>
    </modules>
 </project>

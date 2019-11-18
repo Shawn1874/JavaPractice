@@ -1,6 +1,10 @@
 package com.adv.java.xml;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.xml.bind.JAXB;
 import javax.xml.bind.annotation.XmlElement;
 
 /**
@@ -22,5 +26,19 @@ public class Employees {
     */
    public ArrayList<Employee> getEmployees() { 
       return employees; 
+   }
+   
+   /**
+    * Iterate over all employees and write a all employee data to an .xml file 
+    * 
+    */
+   public static void printSalaryReport(Employees employees, String fileName) {
+      
+      try(FileWriter employeesFile = new FileWriter(fileName);
+         BufferedWriter writer = new BufferedWriter(employeesFile)) {
+         JAXB.marshal(employees, writer);
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
    }
 }

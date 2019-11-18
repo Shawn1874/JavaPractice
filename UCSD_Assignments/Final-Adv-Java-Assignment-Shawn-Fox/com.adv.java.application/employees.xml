@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<employees>
+    <Employee>
+        <hourlySalary>25.00</hourlySalary>
+        <hoursWorked>55</hoursWorked>
+        <name>shawn</name>
+    </Employee>
+    <Employee>
+        <hourlySalary>11.00</hourlySalary>
+        <hoursWorked>24</hoursWorked>
+        <name>steve</name>
+    </Employee>
+    <Employee>
+        <hourlySalary>12.50</hourlySalary>
+        <hoursWorked>3</hoursWorked>
+        <name>Barbara</name>
+    </Employee>
+    <Employee>
+        <hourlySalary>22.50</hourlySalary>
+        <hoursWorked>44</hoursWorked>
+        <name>Greta</name>
+    </Employee>
+</employees>

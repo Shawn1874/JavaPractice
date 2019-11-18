@@ -5,8 +5,8 @@
     <artifactId>Adv-Java-Final-Project-Parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>com.adv.java.application</artifactId>
-  <build>
+  <artifactId>com.adv.java.iostream</artifactId>
+   <build>
       <plugins>
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
@@ -27,11 +27,6 @@
                      <goal>single</goal>
                   </goals>
                   <configuration>
-                     <archive>
-                        <manifest>
-                           <mainClass>com.adv.java.application.Driver</mainClass>
-                        </manifest>
-                     </archive>
                      <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                      </descriptorRefs>
@@ -47,22 +42,12 @@
             </configuration>
          </plugin>
       </plugins>
-      <finalName>AdvJavaFinalProject</finalName>
+      <finalName>EmployeeIO</finalName>
    </build>
    <dependencies>
       <dependency>
          <groupId>Java4</groupId>
          <artifactId>com.adv.java.xml</artifactId>
-         <version>0.0.1-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-         <groupId>Java4</groupId>
-         <artifactId>com.adv.java.streams</artifactId>
-         <version>0.0.1-SNAPSHOT</version>
-      </dependency>
-      <dependency>
-         <groupId>Java4</groupId>
-         <artifactId>com.adv.java.iostream</artifactId>
          <version>0.0.1-SNAPSHOT</version>
       </dependency>
    </dependencies>
