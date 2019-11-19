@@ -45,5 +45,10 @@
       <finalName>EmployeeStreamsDemo</finalName>
    </build>
    <dependencies>
+      <dependency>
+         <groupId>Java4</groupId>
+         <artifactId>com.adv.java.xml</artifactId>
+         <version>0.0.1-SNAPSHOT</version>
+      </dependency>
    </dependencies>
 </project>

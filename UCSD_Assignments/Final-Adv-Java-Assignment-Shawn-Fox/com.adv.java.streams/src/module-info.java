@@ -1,3 +1,3 @@
-module com.adv.java.xml {
-   requires java.xml.bind;
+module com.adv.java.streams {
+   requires com.adv.java.xml
 }
