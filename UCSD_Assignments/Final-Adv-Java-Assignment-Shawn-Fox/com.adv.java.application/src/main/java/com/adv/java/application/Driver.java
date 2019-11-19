@@ -75,9 +75,7 @@ public class Driver {
      listOfEmployees.stream()
         .sorted(Comparator.comparing(Employee::getName))
         .forEach(System.out::println);
-      /*
-       * for(var e : listOfEmployees) { System.out.println(e); }
-       */
+     
      // Demonstrate File I/O and Serialization by writing all employees
      System.out.println("Writing employees using JAXB to serialize the data.");
      Employees.printSalaryReport(employees, employeesFileName);
