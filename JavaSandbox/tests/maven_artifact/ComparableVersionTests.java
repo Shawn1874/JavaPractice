@@ -1,6 +1,8 @@
-package MavenArtifactAPI;
+package maven_artifact;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,7 +39,7 @@ class ComparableVersionTests {
 
 	@Test
 	public void ensureArrayInOrder() {
-	    ComparableVersion[] sortedArray = VERSIONS.clone();
+		ComparableVersion[] sortedArray = VERSIONS.clone();
 	    Arrays.sort(sortedArray);
 	    assertArrayEquals(VERSIONS, sortedArray);
 	}
