@@ -52,4 +52,10 @@ class ArrayListTests {
 		List<String>  ls = Arrays.asList("one", "two", "three");
 		assertEquals(3, ls.size());
 	}
+	
+	@Test 
+	void TestEmptyArrayList() {
+		var solution = new ArrayList<ArrayList<String>>();
+		assertEquals(0, solution.size());
+	}
 }

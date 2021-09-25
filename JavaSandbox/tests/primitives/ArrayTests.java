@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
 class ArrayTests {
@@ -124,5 +125,24 @@ class ArrayTests {
 	void TestArrayHelperSum() {
 		assertEquals(10, ArrayHelper.sum(5, 5));
 		assertEquals(100, ArrayHelper.sum(5, 50, 25, 7, 13));
+	}
+	
+	/***
+	 * Sort descending is somewhat frustrating compared to in C++ because using a predicate
+	 * to reverse order requires the use of boxed types rather than primitive types.  
+	 */
+	@Test
+	void TestSortDescending() {
+		Integer[] values = { 2500, 3500, 1, 38728, 287632, 5, 7, 22331 };
+		
+		
+		Arrays.sort(values, Collections.reverseOrder());
+		
+		assertEquals(287632, values[0]);
+		assertTrue( values[0] >= values[1]);
+		assertTrue( values[2] >= values[3]);
+		assertTrue( values[3] >= values[4]);
+		
+		
 	}
 }
