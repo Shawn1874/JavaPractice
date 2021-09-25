@@ -12,8 +12,8 @@
 		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
 		<com.google.guava.version>28.1-jre</com.google.guava.version>
 		<java.compiler.release>11</java.compiler.release>
-      <openjfx.version>11</openjfx.version>
-      <openjfx.plugin.version>0.0.3</openjfx.plugin.version>
+		<openjfx.version>11</openjfx.version>
+		<openjfx.plugin.version>0.0.3</openjfx.plugin.version>
 	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -24,7 +24,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
 				<configuration>
-					<release>${java.compiler.release}</release>
+					<source>${java.compiler.release}</source>
+					<target>${java.compiler.release}</target>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -43,6 +44,11 @@
 	</build>
 	<dependencies>
 		<dependency>
+			<groupId>org.apache.maven</groupId>
+			<artifactId>maven-artifact</artifactId>
+			<version>3.6.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
 			<version>${openjfx.version}</version>
@@ -58,10 +64,10 @@
 			<version>${junit.jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
-      <dependency>
-         <groupId>org.apache.derby</groupId>
-         <artifactId>derby</artifactId>
-         <version>10.14.2.0</version>
-      </dependency>
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.14.2.0</version>
+		</dependency>
 	</dependencies>
 </project>
