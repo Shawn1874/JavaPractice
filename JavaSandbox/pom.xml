@@ -10,7 +10,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.jupiter.version>5.5.2</junit.jupiter.version>
 		<maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
-		<com.google.guava.version>29.0-jre</com.google.guava.version>
+		<com.google.guava.version>31.0-jre</com.google.guava.version>
 		<java.compiler.release>11</java.compiler.release>
 		<openjfx.version>11</openjfx.version>
 		<openjfx.plugin.version>0.0.3</openjfx.plugin.version>
